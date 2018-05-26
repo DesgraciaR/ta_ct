@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\DetailcutiModel;
 
+use App\PermohonanCuti;
+
 class DetailcutiController extends Controller
 {
     /**
@@ -15,12 +17,9 @@ class DetailcutiController extends Controller
      */
     public function index()
     {
-       
-         // return view('detailcuti');
-
-        $permohonancuti=PermohonanCuti::where('id_atasan',session()->get("data")->nip_baru)->get()->where('status','Diterima');
-        return view('permohonancuti',compact('permohonancuti'));
-
+        
+        $detailcuti=PermohonanCuti::where('id_atasan',session()->get("data")->nip_baru)->get()->where('status',NULL);
+        return view('detailcuti',compact('detailcuti'));
 
     }
 
@@ -54,10 +53,7 @@ class DetailcutiController extends Controller
      */
     public function show($nip_baru)
     {
-        $user = Userdata ::find($nip_baru);
-        var_dump($user);
-        die();
-        return View('detailcuti');
+        //
     }
 
     /**
@@ -78,15 +74,13 @@ class DetailcutiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateDetail(Request $request, $nip_baru)
+    public function updateDetail($id)
     {
-        $permohonancuti= tbl_permohonan_cuti::find($nip_baru);
+        $permohonancuti= PermohonanCuti::find($id);
         $permohonancuti->tgl_mulai = Carbon::createFromFormat('d/m/Y', $request->tgl_mulai)->toDateString();
         $permohonancuti->tgl_selesai = Carbon::createFromFormat('d/m/Y', $request->tgl_selesai)->toDateString();
 
         $permohonancuti->save();
-
-        // Alert::success('Data berhasil di kirim');
         return Redirect('detailcuti');
 
     }

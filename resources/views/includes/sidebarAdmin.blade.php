@@ -25,8 +25,8 @@
           </a>
         </li>
         <li>
-          <a href="pages/forms/form_pengajuan.html">
-            <i class="fa fa-edit fa-2x"></i> <span>Permohonan Cuti</span>
+          <a href="pages/forms/form">
+            <i class="fa fa-edit fa-2x"></i> <span>Data Permohonan Cuti</span>
           </a>
         </li>
         <li>

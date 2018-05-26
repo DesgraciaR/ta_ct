@@ -15,14 +15,56 @@
 
     <!-- Main content -->
     <section class="content">
+
       <!-- /.box -->
     <!-- <form action="{{URL::to('ajukancuti')}}" method="POST"> -->
       {{ Form::open(array('url'=>'ajukancuti','files'=>true)) }}
       <div class="row">
         <!-- /.col (left) -->
+
+        
+            <div class="col-lg-2 col-xs-1">
+                  <div class="small small-box bg-yellow">
+                    <p>12</p>
+                    <p>Jatah Cuti</p>
+                  </div>
+              </div>
+
+
+              <div class="col-lg-2 col-xs-1">
+          <!-- small box -->
+                  <div class="small-box bg-orange">
+                    <p>12</p>
+                    <p>Cuti Diambil<p>
+                </div>
+              </div>
+
+
+              <div class="col-lg-2 col-xs-1">
+          <!-- small box -->
+                  <div class="small-box bg-red">
+                    <p>12</p>
+                    <p>Sisa Cuti</p>
+                </div>
+              </div>
+
         <div class="col-md-12">
           <div class="box">
             <div class="box-body">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="form-group">
               <label>Jenis cuti</label>
                 <select class="form-control select2" style="width: 100%;" name="id_jenis_cuti">

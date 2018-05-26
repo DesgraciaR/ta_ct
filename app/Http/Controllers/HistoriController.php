@@ -24,10 +24,10 @@ class HistoriController extends Controller
 
 
 
-    public function cetak()
-    {
-          return view('print');
-    }
+    // public function cetak()
+    // {
+    //       return view('print');
+    // }
 
 
     /**

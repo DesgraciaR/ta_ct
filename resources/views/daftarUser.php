@@ -1,3 +1,4 @@
+
 <?php $active ='home' ; ?>
 @extends('layouts.page')
 @section('content')

@@ -32,11 +32,14 @@ function printContent(el){
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
-            <div class="box-header">
+            <div class="box-header-pull-left">
+              </div>          
                  <div class="btn-group" role="group" aria-label="...">
                   <a href="{{url('/ajukancuti')}}" class="btn btn-block btn-primary"><i class="fa fa-user-plus"></i>Tambah</a>
-            </div>
-          
+              </div>
+        
+       
+
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-striped">
@@ -78,18 +81,20 @@ function printContent(el){
                   <td>
                      @if($value->status_ppk =='Diterima' || $value->status_ppk=='Ditangguhkan') 
                     <div class="btn-group" role="group" aria-label="...">
-                    <a href="{{url('/cetak')}}" class="btn btn-sm btn-primary">Cetak</i></a>
+                    <a href="{{url('/cetak/'.$value->id_permohonan_cuti)}}" class="btn btn-sm btn-primary"><i class="fa fa-print">Cetak</i></a>
                     </div>
 
                     @elseif($value->status =='Ditolak' || $value->status_ppk =='Ditolak')
                      <div class="btn-group" role="group" aria-label="...">
-                    <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-sm btn-danger">Hapus</i></a>
+                    <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-block btn-danger"><i class="fa fa-trash">Hapus</i></a>
                   </div>
 
                  @elseif($value->status == NULL )
                    <div class="btn-group" role="group" aria-label="...">
-                  <a href="#" class="btn btn-sm btn-success">Batalkan</i></a>
+                  <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-sm btn-success"><i class=" fa fa-close">Batalkan</i></a>
                 </div>
+
+            
 
                 @endif
                 
@@ -121,4 +126,7 @@ function printContent(el){
       'autoWidth'   : false
     });
   });
-</
+</script>
+  
+ 
+ @endsection

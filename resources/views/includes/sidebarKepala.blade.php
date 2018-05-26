@@ -39,8 +39,8 @@
           </a>
         </li>
         <li>
-          <a href="#">
-            <i class="fa fa-hourglass-end fa-2x"></i> <span>Penangguhan Cuti</span>
+          <a href="{{url('/ubahpassword')}}">
+            <i class="fa fa-hourglass-end fa-2x"></i> <span>Ubah Password</span>
           </a>
         </li>
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\PermohonanCuti;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
+use Carbon\Carbon;
 
 class PermohonancutiController extends Controller
 {
@@ -16,7 +17,6 @@ class PermohonancutiController extends Controller
      */
     public function index()
     {
-        // $permohonancuti=PermohonanCuti::all();
         // echo session()->get('user')->ppk;
         if(session()->get('user')->ppk == '1'){
              $permohonancuti=PermohonanCuti::where('status','Diterima')->orWhere('status','Ditangguhkan')->get()->where('status_ppk',NULL);
@@ -69,6 +69,18 @@ class PermohonancutiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+     public function updateDetail(Request $request, $id)
+    {
+         $editpermohonan = PermohonanCuti::find($id);
+         $editpermohonan->tgl_mulai_ubah = Carbon::createFromFormat('d/m/Y', $request->tgl_mulai)->toDateString();
+         $editpermohonan->tgl_selesai_ubah = Carbon::createFromFormat('d/m/Y', $request->tgl_selesai)->toDateString();
+         $editpermohonan->save();
+         return back();
+
+        
+
+    }
+
     public function edit($id)
     {
         //
@@ -141,21 +153,9 @@ class PermohonancutiController extends Controller
         
 
         }
-
-
-
     }
 
-       public function updateStatusbaca($id, $status_baca)
-    {
-         $historicuti = PermohonanCuti::find($id);
-         $historicuti->status_baca=$status_baca;
-         $historicuti->save();
-         return back();
-         // return Redirect::to('permohonancuti');
-        
-    }
-
+      
     /**
      * Remove the specified resource from storage.
      *

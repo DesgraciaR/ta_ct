@@ -27,8 +27,18 @@
         <li>
           <a href="{{url('/pengajuan')}}">
             <i class="fa fa-files-o fa-2x "></i> <span>Pengajuan Cuti</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">{{count(\GlobalHelper::baca())}}</span>
+            </span>
           </a>
         </li>
+
+           <li>
+          <a href="{{url('/ubahpassword')}}">
+            <i class="fa fa-hourglass-end fa-2x"></i> <span>Ubah Password</span>
+          </a>
+        </li>
+
         <li>
           <a href="#">
             <i class="fa fa-history fa-2x"></i> <span>Histori</span>

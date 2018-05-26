@@ -41,6 +41,8 @@ class AjukancutiController extends Controller
     {
         // dd(session()->all());
         $permohonancuti = new PermohonanCuti;
+        // echo $permohonancuti;
+        // exit();
         $permohonancuti->id_jenis_cuti = $request->id_jenis_cuti;
         // $permohonancuti->nip_baru = $request->nip_baru;
         $permohonancuti->tgl_pengajuan =  Carbon::createFromFormat('d/m/Y', $request->tgl_pengajuan)->toDateString();

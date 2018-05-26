@@ -1985,8 +1985,9 @@ a:focus {
 }
 .chat .item > .attachment {
   border-radius: 3px;
-  background: #f4f4f4;
-  margin-left: 65px;
+  background: #fff;
+  position: right;
+  margin-left: 100px;
   margin-right: 15px;
   padding: 10px;
 }
