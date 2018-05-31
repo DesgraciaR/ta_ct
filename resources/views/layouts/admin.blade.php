@@ -12,13 +12,15 @@
 <div class="wrapper">
 
     <header class="main-header">
-    @include('includes.header')
+        @include('includes.header')
     </header>
-    @include('includes.sidebarAdmin')
+    
+        @include('includes.sidebarAdmin');
+    
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="padding: 0;">
-        @yield('content');
+    <div class="content-wrapper">
+        @yield('content')
     </div>
     <!-- /.content-wrapper -->
 

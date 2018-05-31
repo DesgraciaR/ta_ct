@@ -26,14 +26,16 @@
         </li>
         <li>
           <a href="pages/forms/form">
-            <i class="fa fa-edit fa-2x"></i> <span>Data Permohonan Cuti</span>
+            <i class="fa fa-calendar-o fa-2x"></i> <span>Data Libur Nasional</span>
           </a>
         </li>
         <li>
-          <a href="pages/tables/table_users.html">
+          <a href="{{url('daftarUser')}}">
             <i class="fa fa-table fa-2x"></i> <span>Table Pegawai</span>
           </a>
         </li>
+
+       
             </section>
     <!-- /.sidebar -->
   </aside>

@@ -12,9 +12,6 @@ function printContent(el){
     document.body.innerHTML = restorepage;
 }
 </script>
-
-
-
  <section class="sidebar">
     <section class="content-header">
       <h1>
@@ -32,26 +29,21 @@ function printContent(el){
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
-            <div class="box-header-pull-left">
-              </div>          
+            <div class="box-header-pull-left"></div> 
                  <div class="btn-group" role="group" aria-label="...">
                   <a href="{{url('/ajukancuti')}}" class="btn btn-block btn-primary"><i class="fa fa-user-plus"></i>Tambah</a>
-              </div>
-        
-       
-
-            <!-- /.box-header -->
+                  </div>  
+          <!-- /.box-header -->
             <div class="box-body">
-              <table id="example2" class="table table-bordered table-striped">
+              <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Jenis Cuti</th>
                   <th>Tanggal Pengajuan</th>
                   <th>Mulai</th>
                   <th>Selesai</th>
-                  <th>Alamat</th>
                   <th>Keputusan Atasan Langsung</th>
-                  <th>Keputusan Kepala Kepegawaian Umum</th>
+                  <th>Keputusan KBTU</th>
                   <th>Opsi</th>
                 </tr>
                 </thead>
@@ -60,9 +52,8 @@ function printContent(el){
                 <tr>
                   <td>{{$value->JenisCuti->jenis_cuti}}</td>
                   <td>{{$value->tgl_pengajuan}}</td>
-                  <td>{{$value->tgl_mulai}}</td>
-                  <td>{{$value->tgl_selesai}}</td>
-                  <td>{{$value->alamat_cuti}}</td>
+                  <td>{{$value->tgl_mulai_ubah?:$value->tgl_mulai}}</td>
+                  <td>{{$value->tgl_selesai_ubah?:$value->tgl_selesai}}</td>
                   <td>
                       @if($value->status=='Diterima')
                         <span class="label label-success pull-left">{{$value->status}}</span>
@@ -81,7 +72,15 @@ function printContent(el){
                   <td>
                      @if($value->status_ppk =='Diterima' || $value->status_ppk=='Ditangguhkan') 
                     <div class="btn-group" role="group" aria-label="...">
-                    <a href="{{url('/cetak/'.$value->id_permohonan_cuti)}}" class="btn btn-sm btn-primary"><i class="fa fa-print">Cetak</i></a>
+                    <a href="{{url('/cetak/'.$value->id_permohonan_cuti)}}" class="btn btn-sm btn-primary"><i class="fa fa-print"></i>Cetak</a>
+                    </div>
+
+                    <div class="btn-group" role="group" aria-label="...">
+                    <a href="{{url('/cetak/'.$value->id_permohonan_cuti)}}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i>Lihat</a>
+                    </div>
+
+                    <div class="btn-group" role="group" aria-label="...">
+                    <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-block btn-danger"><i class="fa fa-trash">Hapus</i></a>
                     </div>
 
                     @elseif($value->status =='Ditolak' || $value->status_ppk =='Ditolak')
@@ -89,7 +88,7 @@ function printContent(el){
                     <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-block btn-danger"><i class="fa fa-trash">Hapus</i></a>
                   </div>
 
-                 @elseif($value->status == NULL )
+                 @elseif($value->status == NULL || $value->status_ppk == NULL)
                    <div class="btn-group" role="group" aria-label="...">
                   <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-sm btn-success"><i class=" fa fa-close">Batalkan</i></a>
                 </div>
@@ -124,8 +123,8 @@ function printContent(el){
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false
-    });
-  });
+    })
+  })
 </script>
   
  

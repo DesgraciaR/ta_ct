@@ -31,7 +31,7 @@
 
                   </div>
                 <div class="box-body no-padding">
-                    <img src="{{url('dist/img/user1-128x128.jpg') }}" class="pull-right-left" > 
+                    <img style="align-content: center;" src="{{url('dist/img/user1-128x128.jpg') }}" class="pull-right-left"> 
                     <table class="table table-striped">  
                        <tr>
                           <td>Nama</td>
@@ -49,6 +49,10 @@
                           <td>Masa Kerja</td>
                           <td>{{$data->mk_tahun}}</td>
                         </tr>
+                        <tr>
+                          <td>Unit Organisasi</td>
+                          <td>{{$data->namaunor}}</td>
+                        </tr>
                     </table>
                 </div>
 
@@ -60,11 +64,9 @@
       <div class="col-md-8">
           <div class="box">
             <div class="box-header with-border"><label>DATA CUTI</label>
-            @if(session()->get('user')->ppk == NULL )
               <div class="btn-group pull-right" role="group" aria-label="...">
                  <a data-target="#modal-default" data-toggle="modal" class="btn btn-block btn-primary"><i class="fa fa-edit"></i>Edit</a> 
               </div>
-            @endif
             </div>
             <div class="box-tools pull-right">          
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -100,24 +102,51 @@
                       <td>Bukti Pendukung</td>
                       <td>{{$detailpermohonan->bukti_cuti}}</td>
                     </tr>
+
+                     @if(session()->get('user')->ppk == '1')
+                    <tr>
+                      <td>Ket_acc_Atasan</td>
+                      <td>{{$detailpermohonan->alasan_acc_atasan}}</td>
+                    </tr>
+                    @endif
+
+              
                   </table>
                 </div>
+
 
                 <div class="box-footer text-center">
                   <a href="javascript:void(0)" class="uppercase"></a>
                 </div>
 
-                 <div class="btn-group pull-left-right" role="group" aria-label="...">
-                  <a href="{{url('ubahstatus/'.$detailpermohonan->id_permohonan_cuti.'/Diterima')}}" class="btn btn-block btn-primary">Terima</a>
-                 </div>
+            
+               <form method="post" action="{{url('updatetindakan',$detailpermohonan->id_permohonan_cuti)}}">
+                      {{csrf_field()}}
+              <div class="form-group">
+                 <label>Tindakan</label>
+                <select class="form-control select2" style="width: 100%;" name="tindakan" required="Terima">
+                    <option value="Diterima">Terima</option>
+                    <option value="Ditolak">Tolak</option>
+                    <option value="Ditangguhkan">Tangguhkan</option>
+              
+                </select>
+              </div>
 
-                 <div class="btn-group pull-left-right" role="group" aria-label="...">
-                  <a href="{{url('ubahstatus/'.$detailpermohonan->id_permohonan_cuti.'/Ditolak')}}" class="btn btn-block btn-primary">Tolak</a>
-                </div>
+              <div class="form-group">
+                  <label>Tuliskan Pesan</label>
+                  <textarea class="form-control" rows="3" name="pesan" placeholder="Enter ..." name="alasan"></textarea>
+              </div>
 
-                <div class="btn-group pull-left-right" role="group" aria-label="...">
-                  <a href="{{url('ubahstatus/'.$detailpermohonan->id_permohonan_cuti.'/Ditangguhkan')}}" class="btn btn-block btn-primary">Tangguhkan</a>
-                </div>
+
+              <div class="form-group">
+                <button type="#" class="btn btn-primary" name="kirim">Kirim</button>
+                <div class="btn-group" role="group" aria-label="...">
+                  <a href="{{url('/permohonan')}}" class="btn btn-primary">Kembali</i></a></div>
+                <!--   <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-close"></i></a> -->
+              </div>
+            </form>
+
+
 
             </div>
         </div>
@@ -148,7 +177,7 @@
                                 <div class="input-group-addon">
                                   <i class="fa fa-calendar"></i>
                                 </div>
-                                  <input type="text" class="form-control pull-right" id="datepicker2" name="tgl_mulai" value="{{$detailpermohonan->tgl_mulai_ubah?:$detailpermohonan->tgl_mulai}}">
+                                  <input type="text" class="form-control pull-right" id="datepicker1" name="tgl_mulai" value="{{$detailpermohonan->tgl_mulai_ubah?:$detailpermohonan->tgl_mulai}}">
                               </div>
                             </div>
                             <div class="form-group">
@@ -157,10 +186,10 @@
                                 <div class="input-group-addon">
                                   <i class="fa fa-calendar"></i>
                                 </div>
-                                <input type="text" class="form-control pull-right" id="datepicker3" name="tgl_selesai" value="{{$detailpermohonan->tgl_selesai_ubah?:$detailpermohonan->tgl_selesai}}">
+                                <input type="text" class="form-control pull-right" id="datepicker2" name="tgl_selesai" value="{{$detailpermohonan->tgl_selesai_ubah?:$detailpermohonan->tgl_selesai}}">
                               </div>
                               <!-- /.input group -->
-                            </div>s
+                            </div>
                            
                         </div>
                       </div>
@@ -188,10 +217,12 @@
   $(function () {
     //Date picker
     $('#datepicker1').datepicker({
-      autoclose: true
+      autoclose: true,
+      date: new Date("{{ $detailpermohonan->tgl_mulai }}")
     });
     $('#datepicker2').datepicker({
-      autoclose: true
+      autoclose: true,
+      date: new Date("{{ $detailpermohonan->tgl_selesai }}")
     });
     $('#datepicker3').datepicker({
       autoclose: true

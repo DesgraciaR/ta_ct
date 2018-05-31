@@ -12,10 +12,35 @@
         <li class="active">Form pengajuan</li>
       </ol>
     </section>
-
+    
     <!-- Main content -->
     <section class="content">
+      <?php
+    $mul = '2018-06-01';
+    $sel = '2018-06-05';
+      $period = new DatePeriod(
+                                 new DateTime($mul),
+                                 new DateInterval('P1D'),
+                                 new DateTime(date('Y-m-d', strtotime('+1 days', strtotime($sel))))
+                            );
 
+
+
+    ?>
+
+      <?php
+      $i = 0;
+      $arrTgl = array();
+        foreach ($period as $key => $value) {
+          if($value->format('D') != 'Sat' && $value->format('D') != 'Sun') {
+              $arrTgl[$i] = $value->format('Y-m-d');
+            
+          }
+          $i++;
+}
+          var_dump($arrTgl);
+
+      ?>
       <!-- /.box -->
     <!-- <form action="{{URL::to('ajukancuti')}}" method="POST"> -->
       {{ Form::open(array('url'=>'ajukancuti','files'=>true)) }}
@@ -23,48 +48,34 @@
         <!-- /.col (left) -->
 
         
-            <div class="col-lg-2 col-xs-1">
+           <!--  <div class="col-lg-2 col-xs-1">
                   <div class="small small-box bg-yellow">
                     <p>12</p>
                     <p>Jatah Cuti</p>
                   </div>
               </div>
-
-
-              <div class="col-lg-2 col-xs-1">
+ -->
+<!-- 
+              <div class="col-lg-2 col-xs-1"> -->
           <!-- small box -->
-                  <div class="small-box bg-orange">
+                  <!-- <div class="small-box bg-orange">
                     <p>12</p>
                     <p>Cuti Diambil<p>
                 </div>
-              </div>
+              </div> -->
 
-
-              <div class="col-lg-2 col-xs-1">
+<!-- 
+              <div class="col-lg-2 col-xs-1"> -->
           <!-- small box -->
-                  <div class="small-box bg-red">
+                 <!--  <div class="small-box bg-red">
                     <p>12</p>
                     <p>Sisa Cuti</p>
                 </div>
               </div>
-
+ -->
         <div class="col-md-12">
           <div class="box">
             <div class="box-body">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="form-group">
               <label>Jenis cuti</label>
                 <select class="form-control select2" style="width: 100%;" name="id_jenis_cuti">
@@ -148,9 +159,9 @@
               <div>
                 <button type="#" class="btn btn-primary" name="kirim">Submit</button>
                 <div class="btn-group" role="group" aria-label="...">
-                  <a href="{{url('/pengajuan')}}" class="btn btn-primary">Batal</i></a>
+                  <a href="{{url('/pengajuan')}}" class="btn btn-primary">Batal</i></a></div>
                 <!--   <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-close"></i></a> -->
-                 </div>
+              </div>
 
 
 

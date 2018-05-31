@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Carbon;
 use App\PermohonanCuti;
 use App\JenisCuti;
-
+use App\LiburModel;
+use Alert;
+use Illuminate\Contracts\Validation ;
 
 class AjukancutiController extends Controller
 {
@@ -20,6 +22,13 @@ class AjukancutiController extends Controller
         return view('ajukancuti')->with('jenis_cuti',$jenis_cuti);
     }
 
+
+    public function jatahcuti()
+    {
+
+
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -39,41 +48,88 @@ class AjukancutiController extends Controller
      */
     public function store(Request $request)
     {
-        // dd(session()->all());
-        $permohonancuti = new PermohonanCuti;
-        // echo $permohonancuti;
-        // exit();
-        $permohonancuti->id_jenis_cuti = $request->id_jenis_cuti;
-        // $permohonancuti->nip_baru = $request->nip_baru;
-        $permohonancuti->tgl_pengajuan =  Carbon::createFromFormat('d/m/Y', $request->tgl_pengajuan)->toDateString();
-        $permohonancuti->tgl_mulai = Carbon::createFromFormat('d/m/Y', $request->tgl_mulai)->toDateString();
-        $permohonancuti->tgl_selesai = Carbon::createFromFormat('d/m/Y', $request->tgl_selesai)->toDateString();
-        $permohonancuti->alamat_cuti = $request->alamat;
-        $permohonancuti->alasan_cuti = $request->alasan;
-        $permohonancuti->noTelepon = $request->noTelepon;
-        $filename=time().'.'.request()->foto_bukti->getClientOriginalExtension();
-        if(request()->foto_bukti->move(public_path('foto_bukti'),$filename)){
-              $permohonancuti->bukti_cuti = 'foto_bukti/'.$filename;     
-        }
         
-        $permohonancuti->nip_baru = $request->session()->get("data")->nip_baru;
-            if(session()->get("data")->jenis_jabatan==1){
-                $permohonancuti->id_atasan = $request->tujuan;
-            }else{
-                if( $request->tujuan==session()->get("data")->nip_atasan){
-                    $permohonancuti->id_atasan = $request->tujuan;
+        // $validator =validator::make($request->all(), $this->validationRues);
+            // if($validation->fails()){
+            //     return redirect()->back()->withErrors($validation->error()) ;
+            // }else{
+        $pengajuan = Carbon::parse(($request->tgl_pengajuan), 'Asia/Jakarta');
+        $mulai = Carbon::parse(($request->tgl_mulai), 'Asia/Jakarta');
+        $end = Carbon::parse(($request->tgl_selesai), 'Asia/Jakarta');
 
-                }else{
-                    $permohonancuti->id_atasan = $request->tujuan;
-                }
-               
-            }
-        $permohonancuti->save();
+        // dd($pengajuan, $mulai, $end);
+                    
+      $period = new \DatePeriod(
+                                 new \DateTime($mulai),
+                                 new \DateInterval('P1D'),
+                                 new \DateTime(date('Y-m-d', strtotime('+1 days', strtotime($end))))
+                            );
+      $i = 0;
+      $arrTgl = array();
+      $libur = LiburModel::all();
 
-        // Alert::success('Data berhasil di kirim');
-        return Redirect::to('dashboard');
+        foreach ($period as $key => $value) {
+          if($value->format('D') != 'Sat' && $value->format('D') != 'Sun') {
+              $libur = LiburModel::where('tanggal', $value->format('Y-m-d'))->count();
+
+              if($libur==0) {
+                  $arrTgl[$i] = $value->format('Y-m-d');
+                
+              }
+
+            
+          }
+          $i++;
+}
+
+                    $permohonancuti = new PermohonanCuti;
+                    $permohonancuti->id_jenis_cuti = $request->id_jenis_cuti;
+                    $permohonancuti->tgl_pengajuan = $pengajuan;
+                    $permohonancuti->tgl_mulai = $mulai;
+                    $permohonancuti->tgl_selesai = $end;
+                    $permohonancuti->alamat_cuti = $request->alamat;
+                    $permohonancuti->alasan_cuti = $request->alasan;
+                    $permohonancuti->jumlah_cuti = count($arrTgl);
+                    $permohonancuti->noTelepon = $request->noTelepon;
+                    $filename=time().'.'.request()->foto_bukti->getClientOriginalExtension();
+                    if(request()->foto_bukti->move(public_path('foto_bukti'),$filename)){
+                          $permohonancuti->bukti_cuti = 'foto_bukti/'.$filename;     
+                    }
+                    
+                    $permohonancuti->nip_baru = $request->session()->get("data")->nip_baru;
+                        if(session()->get("data")->jenis_jabatan==1){
+                            $permohonancuti->id_atasan = $request->tujuan;
+                        }else{
+                            if( $request->tujuan==session()->get("data")->nip_atasan){
+                                $permohonancuti->id_atasan = $request->tujuan;
+
+                            }else{
+                                $permohonancuti->id_atasan = $request->tujuan;
+                            }
+                           
+                        }
+                    $permohonancuti->save();
+                    Alert::success('Data berhasil di kirim');
+                    return Redirect::to('dashboard');
+    }
+
+
+    public function hitungCuti($tgl_mulai, $tgl_selesai,$delimeter)
+    {
+        $period = new DatePeriod(
+             new DateTime($tgl_mulai),
+             new DateInterval('P1D'),
+             new DateTime($tgl_selesai)
+        );
+
+        foreach ($period as $tgl ) {
+            # code...
+            echo  $tgl;
+        }
+
 
     }
+
 
     /**
      * Display the specified resource.

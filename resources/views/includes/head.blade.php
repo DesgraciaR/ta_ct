@@ -24,7 +24,8 @@
     <link rel="stylesheet" href="{{ url('bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
   <!-- bootstrap datepicker -->
     <link rel="stylesheet" href="{{ url('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
-    <link rel="stylesheet" href="{{ url('/vendor/sweetalert/sweetalert.min.js') }}">
+
+   
 
    
 
@@ -46,7 +47,7 @@
 <!-- Bootstrap 3.3.7 -->
 <script src=    "{{ url('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- SlimScroll -->
-<script src="{{ url ('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+<!-- <script src="{{ url ('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script> -->
 <!-- FastClick -->
 <script src="{{ url ('bower_components/fastclick/lib/fastclick.js') }}"></script>
 <!-- AdminLTE App -->
@@ -62,30 +63,8 @@ sweetAlert -->
 <script type="{{ url('/dist/js/sweetalert.js') }}"></script>
 <script type="{{ url('/dist/js/sweetalert.min.js') }}"></script>
 
-
-
-
-
-<script>
-  $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false
-    })
-  })
-</script>
-
-
-
-
-
-
-
+<script src="{{ url ('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url ('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 
 
 

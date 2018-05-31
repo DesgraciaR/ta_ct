@@ -42,15 +42,15 @@
                   <td>{{$value->nip_baru}}</td>
                   <td>{{$value->JenisCuti->jenis_cuti}}</td>
                   <td>{{$value->tgl_pengajuan}}</td>
-                  <td>{{$value->tgl_mulai}}</td>
-                  <td>{{$value->tgl_selesai}}</td>
+                  <td>{{$value->tgl_mulai_ubah?:$value->tgl_mulai}}</td>
+                  <td>{{$value->tgl_selesai_ubah?:$value->tgl_selesai}}</td>
                   <td>{{$value->alamat_cuti}}</td>
                   
                   <td>
                   
                     
                   <div class="btn-group" role="group" aria-label="...">
-                  <a href="{{url('/detailcuti/'.$value->id_permohonan_cuti)}}" class="btn btn-block btn-primary">Detail</a>
+                  <a href="{{url('/detailcuti/'.$value->id_permohonan_cuti)}}" class="btn btn-block btn-primary">Lihat</a>
                  </div>
                 </td>
                 </tr>

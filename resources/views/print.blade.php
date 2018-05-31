@@ -4,28 +4,30 @@
 @php($data = \GlobalHelper::accessdata($cetakform->nip_baru))
 
 
-<div class="row">
-              <div class="box-pull-right" >
-                  <p class="filename">
-                    Yogyakarta, {{$cetakform->tgl_pengajuan}}
-                  <p>Kepada
-                  <p>Yth
-                  &nbsp;<p>@if($cetakform->id_atasan == session()->get("data")->nip_atasan)</p>
-                        <p>{{session()->get("data")->jabatan_atasan}}<p>
-                          @else
-                        <p>{{session()->get("data")->jabatan_atasan_atasan}}</p>
-                  
-                       @endif
-                  
-                  <p>di Kantor Regional I BKN</p>
-                  <p>Yogyakarta</p>
-                 </p>
-                  
-              </div>
+<div class="box" style="width: 100%; position: center;">
+<div class="coll-md-12">
+  <div class="coll-md-4 pull-right">
+  
+        <p class="filename">
+          Yogyakarta, {{$cetakform->tgl_pengajuan}}
+     <p style="text-align: justify; text-indent: 0.5in;">Kepada</p>
+        <p style="text-align: justify; text-indent: 0.5in;">Yth</p>
+        <p style="text-align: justify; text-indent: 0.5in;">@if($cetakform->id_atasan == session()->get("data")->nip_atasan)</p>
+              <p style="text-align: justify; text-indent: 0.5in;">{{session()->get("data")->jabatan_atasan}}</p>
+                @else
+              <p style="text-align: justify; text-indent: 0.5in;">{{session()->get("data")->jabatan_atasan_atasan}}</p>
+        
+             @endif
+        
+        <p style="text-align: justify; text-indent: 0.5in;">di Kantor Regional I BKN</p>
+        <p style="text-align: justify; text-indent: 0.5in;">Yogyakarta</p>
+       </p>  
+    
+  </div>
 
-                <div class="8"></div>
-            
-              <table class="table1" border="1" width="100%" position="center">
+
+        
+              <table class="table1" border="1" width="100%">
                 <tr>
                   <td colspan="6"><b>I.DATA PEGAWAI</b></td>
                 </tr>
@@ -50,21 +52,30 @@
                 </tr>
                 <tr>
                   <td colspan="2">1.Cuti Tahunan</td>
-                  <td><input type="checkbox" class="minimal" ></td>
+                  <td> @if($cetakform->id_jenis_cuti == '1') <input type="checkbox" class="minimal" checked>
+                        @endif
+                   </td>
+                    
+                 
                   <td colspan="2">2.Cuti Besar</td>
-                  <td><input type="checkbox" class="minimal" ></td>
+                  <td> @if($cetakform->id_jenis_cuti == '2') <input type="checkbox" class="minimal" checked>
+                        @endif</td>
                 </tr>
                 <tr>
                   <td colspan="2">3.Cuti Sakit</td>
-                  <td><input type="checkbox" class="minimal" ></td>
+                  <td> @if($cetakform->id_jenis_cuti == '3') <input type="checkbox" class="minimal" checked>
+                        @endif</td>
                   <td colspan="2">4.Cuti Melahirkan</td>
-                  <td><input type="checkbox" class="minimal" ></td>
-                </tr>
+                  <td> @if($cetakform->id_jenis_cuti == '4') <input type="checkbox" class="minimal" checked>
+                        @endif</td>
+                 </tr>
                 <tr>
                   <td colspan="2">6.Cuti Karena Alasan Penting</td>
-                  <td><input type="checkbox" class="minimal" ></td>
+                  <td> @if($cetakform->id_jenis_cuti == '5') <input type="checkbox" class="minimal" checked>
+                        @endif</td>
                   <td colspan="2">6.Cuti di Luar Tanggungan Negara</td>
-                  <td><input type="checkbox" class="minimal" ></td>
+                  <td> @if($cetakform->id_jenis_cuti == '6') <input type="checkbox" class="minimal" checked>
+                        @endif</td>
                 </tr>
                  <tr>
                   <td colspan="6"><b>III.ALASAN CUTI</b></td>
@@ -128,7 +139,14 @@
                   <td colspan="2">{{$cetakform->noTelepon}}</td>
                 </tr>
                <tr>
-                  <td colspan="3"><textarea rows="2" cols="30"> Hormat Saya</textarea></td>
+                  <td colspan="3">
+                     <p style="text-align: center;">Hormat saya</p>
+                     &nbsp;
+                     &nbsp;
+                     &nbsp;
+                     <p style="text-align: center; margin-top: 15px">{{$data->nama}}</p>
+                     <p style="text-align: center;">NIP: {{$data->nip_baru}}</p>
+                  </td>
                </tr>
                <tr>
                  <td colspan="6"><b>VII.PERTIMBANGAN ATASAN LAGSUNG</b></td>
@@ -140,22 +158,32 @@
                  <td colspan="3">TIDAK DISETUJUI</td>
                </tr>
                 <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
+                <td>
+                 @if($cetakform->status == 'Diterima' && $cetakform->tgl_mulai_ubah == NULL && $cetakform->tgl_selesai_ubah == NULL)<input type="checkbox" class="minimal" checked>
+                 @endif</td>
+                 <td>
+                    @if($cetakform->status == 'Diterima')<input type="checkbox" class="minimal" checked>
+                 @endif</td>
+                 <td>@if($cetakform->status == 'Ditangguhkan')<input type="checkbox" class="minimal" checked>
+                 @endif </td>
+                 <td>@if($cetakform->status == 'Ditolak')<input type="checkbox" class="minimal" checked>
+                 @endif</td>
                  <td colspan="3"></td>
                </tr>
                <tr>
-                 <td colspan="3"></td>
+                 <td colspan="3">{{$cetakform->alasan_acc_atasan }}</td>
                  <td colspan="3">
+                  <p></p>
                       &nbsp;
-                      <p class="center">@if($cetakform->id_atasan == session()->get("data")->nip_atasan)
-                        <h>{{session()->get("data")->nama_atasan}}</h>
+                      &nbsp;
+                      &nbsp;
+                      @if($cetakform->id_atasan == session()->get("data")->nip_atasan)
+                        <p style="text-align: center; padding-top: 10px;">{{session()->get("data")->nama_atasan}}</p>
                           @else
-                       <h>{{session()->get("data")->nama_atasan_atasan}}</h>
+                       <p style="text-align: center;">{{session()->get("data")->nama_atasan_atasan}}</p>
                        @endif
 
-                      &nbsp; {{$cetakform->id_atasan}}</p>
+                    <p style="text-align: center;"> {{$cetakform->id_atasan}}</p>
                  </td>
                  
                </tr>
@@ -169,14 +197,26 @@
                  <td colspan="3">TIDAK DISETUJUI</td>
                </tr>
                <tr>
-                 <td></td>
-                 <td></td>
-                 <td></td>
+                <td>
+                 @if($cetakform->status_ppk == 'Diterima' && $cetakform->tgl_mulai_ubah == NULL && $cetakform->tgl_selesai_ubah == NULL)<input type="checkbox" class="minimal" checked>
+                 @endif</td>
+                 <td>
+                    @if($cetakform->status_ppk == 'Diterima')<input type="checkbox" class="minimal" checked>
+                 @endif</td>
+                 <td>@if($cetakform->status_ppk == 'Ditangguhkan')<input type="checkbox" class="minimal" checked>
+                 @endif </td>
+                 <td>@if($cetakform->status_ppk == 'Ditolak')<input type="checkbox" class="minimal" checked>
+                 @endif</td>
+                 <td colspan="3"></td>
+              </tr>
+              <tr>
+                 <td colspan="3">{{$cetakform->alasan_acc_ppk }}</td>
                  <td colspan="3"></td>
                </tr>
-                
+              
+
               </table>
-            </div>
+          </div>
 </div>
  
 </body> 
