@@ -2,11 +2,10 @@
 @extends('layouts.admin')
 @section('content')
 
+
+
 <!--  -->
  
-
-
-
  <section class="sidebar">
     <section class="content-header">
       <h1>
@@ -34,9 +33,6 @@
                 <tr>
                   <th>Nama</th>
                   <th>NIP</th>
-                  <th>Jabatan</th>
-                  <th>Unit Organisasi</th>
-                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,10 +40,8 @@
                    @foreach($daftarUser as $value)
                 <tr>
                   <td>{{$value->nama}}</td>
-                  <td>{{$value->nip_baru}}
-                  </td>
-                  <td>{{$value->level}}</td>
-                  <td> 4</td>
+                  <td>{{$value->nip_baru}}</td>
+              
                   <td>
                        <div class="btn-group pull-right" role="group" aria-label="...">
                          <a data-target="#modal-default" data-toggle="modal" class="btn btn-block btn-primary"><i class="fa fa-edit"></i>Reset Password</a> 

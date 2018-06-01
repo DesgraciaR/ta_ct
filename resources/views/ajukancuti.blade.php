@@ -15,34 +15,9 @@
     
     <!-- Main content -->
     <section class="content">
-      <?php
-    $mul = '2018-06-01';
-    $sel = '2018-06-05';
-      $period = new DatePeriod(
-                                 new DateTime($mul),
-                                 new DateInterval('P1D'),
-                                 new DateTime(date('Y-m-d', strtotime('+1 days', strtotime($sel))))
-                            );
-
-
-
-    ?>
-
-      <?php
-      $i = 0;
-      $arrTgl = array();
-        foreach ($period as $key => $value) {
-          if($value->format('D') != 'Sat' && $value->format('D') != 'Sun') {
-              $arrTgl[$i] = $value->format('Y-m-d');
-            
-          }
-          $i++;
-}
-          var_dump($arrTgl);
-
-      ?>
+      
       <!-- /.box -->
-    <!-- <form action="{{URL::to('ajukancuti')}}" method="POST"> -->
+   
       {{ Form::open(array('url'=>'ajukancuti','files'=>true)) }}
       <div class="row">
         <!-- /.col (left) -->

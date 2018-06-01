@@ -92,6 +92,6 @@ class PengajuanController extends Controller
     public function destroy($id)
     {
         PermohonanCuti::find($id)->delete();
-        return redirect ('pengajuan')->with('sukses_hapus','yes'); ;   
+        return redirect ('pengajuan')->with('sukses_hapus','yes');   
     }
 }

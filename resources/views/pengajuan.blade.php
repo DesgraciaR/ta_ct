@@ -39,21 +39,21 @@ function printContent(el){
                 <thead>
                 <tr>
                   <th>Jenis Cuti</th>
-                  <th>Tanggal Pengajuan</th>
                   <th>Mulai</th>
                   <th>Selesai</th>
+                  <th>Jumlah Hari</th>
                   <th>Keputusan Atasan Langsung</th>
                   <th>Keputusan KBTU</th>
-                  <th>Opsi</th>
+                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
                   @foreach($pengajuan as $value)
                 <tr>
                   <td>{{$value->JenisCuti->jenis_cuti}}</td>
-                  <td>{{$value->tgl_pengajuan}}</td>
                   <td>{{$value->tgl_mulai_ubah?:$value->tgl_mulai}}</td>
                   <td>{{$value->tgl_selesai_ubah?:$value->tgl_selesai}}</td>
+                  <td>{{$value->jumlah_cuti}}</td>
                   <td>
                       @if($value->status=='Diterima')
                         <span class="label label-success pull-left">{{$value->status}}</span>
@@ -80,12 +80,12 @@ function printContent(el){
                     </div>
 
                     <div class="btn-group" role="group" aria-label="...">
-                    <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-block btn-danger"><i class="fa fa-trash">Hapus</i></a>
+                    <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-block btn-primary"><i class="fa fa-trash">Hapus</i></a>
                     </div>
 
                     @elseif($value->status =='Ditolak' || $value->status_ppk =='Ditolak')
                      <div class="btn-group" role="group" aria-label="...">
-                    <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-block btn-danger"><i class="fa fa-trash">Hapus</i></a>
+                    <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-block btn-primary"><i class="fa fa-trash">Hapus</i></a>
                   </div>
 
                  @elseif($value->status == NULL || $value->status_ppk == NULL)

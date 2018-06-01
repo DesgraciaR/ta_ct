@@ -48,7 +48,10 @@ Route::get('/cetak/{id}','PrintController@show');
 
 Route::resource('/manajemenuser','ManajemenUserController');
 Route::get('/daftarUser','ManajemenUserController@index');
-
+Route::get('/daftarLibur','ManajemenUserController@libur');
+Route::get('/hapuslibur/{id}','ManajemenUserController@destroy');
+Route::get('/perbaharuilibur/{id}','ManajemenUserController@hapuslibur');
+Route::post('/tambahlibur','ManajemenUserController@store');
 // Route::get('alert/{AlertType}','sweetalertController@alert')->name('alert')
 // Route::get('/logout',function(){
 

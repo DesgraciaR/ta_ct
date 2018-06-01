@@ -25,7 +25,7 @@
           </a>
         </li>
         <li>
-          <a href="pages/forms/form">
+          <a href="{{url ('/daftarLibur')}}">
             <i class="fa fa-calendar-o fa-2x"></i> <span>Data Libur Nasional</span>
           </a>
         </li>

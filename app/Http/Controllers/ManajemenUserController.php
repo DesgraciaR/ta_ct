@@ -8,6 +8,10 @@ use App\User;
 
 use App\PermohonanCuti;
 
+use App\LiburModel;
+
+use Carbon\Carbon;
+
 
 
 
@@ -22,6 +26,14 @@ class ManajemenUserController extends Controller
     {
         $daftarUser =User::all();
         return view('daftarUser',compact('daftarUser'));
+     }
+
+
+
+     public function libur()
+    {
+        $daftarLibur =LiburModel::all();
+        return view('harilibur',compact('daftarLibur'));
      }
 
     /**
@@ -63,7 +75,13 @@ class ManajemenUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $liburnasional = new LiburModel;
+        $tgl = Carbon::parse(($request->tgl_libur), 'Asia/Jakarta');
+        $liburnasional->tanggal = $tgl;
+        $liburnasional->ket_libur = $request->keterangan ;
+        $liburnasional->save();
+
+        return back();
     }
 
     /**
@@ -108,6 +126,13 @@ class ManajemenUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        LiburModel::find($id)->delete();
+        return back();
+    }
+
+     public function hapuslibur($id)
+    {
+        LiburModel::All()->delete();
+        return back();
     }
 }

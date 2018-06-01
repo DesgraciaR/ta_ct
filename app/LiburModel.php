@@ -8,6 +8,6 @@ class LiburModel extends Model
 {
     protected $primaryKey = 'id';
     protected $table = 'liburnasional';
-	protected $fillable = ['tanggal',];
+	protected $fillable = ['id,tanggal,ket_libur',];
 	
 }

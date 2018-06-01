@@ -49,10 +49,6 @@ class AjukancutiController extends Controller
     public function store(Request $request)
     {
         
-        // $validator =validator::make($request->all(), $this->validationRues);
-            // if($validation->fails()){
-            //     return redirect()->back()->withErrors($validation->error()) ;
-            // }else{
         $pengajuan = Carbon::parse(($request->tgl_pengajuan), 'Asia/Jakarta');
         $mulai = Carbon::parse(($request->tgl_mulai), 'Asia/Jakarta');
         $end = Carbon::parse(($request->tgl_selesai), 'Asia/Jakarta');
@@ -114,22 +110,7 @@ class AjukancutiController extends Controller
     }
 
 
-    public function hitungCuti($tgl_mulai, $tgl_selesai,$delimeter)
-    {
-        $period = new DatePeriod(
-             new DateTime($tgl_mulai),
-             new DateInterval('P1D'),
-             new DateTime($tgl_selesai)
-        );
-
-        foreach ($period as $tgl ) {
-            # code...
-            echo  $tgl;
-        }
-
-
-    }
-
+    
 
     /**
      * Display the specified resource.

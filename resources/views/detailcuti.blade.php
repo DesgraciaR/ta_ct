@@ -89,7 +89,10 @@
                       <td>Tanggal Selesai</td>
                       <td>{{$detailpermohonan->tgl_selesai_ubah?:$detailpermohonan->tgl_selesai}}</td>
                     </tr>
-
+                    <tr>
+                      <td>Jumlah Cuti</td>
+                      <td>{{$detailpermohonan->jumlah_cuti}}</td>
+                    </tr>
                     <tr>
                       <td>Alamat</td>
                       <td>{{$detailpermohonan->alamat_cuti}}</td>
@@ -210,15 +213,15 @@
           </div>
         </div>
       </div>
-</section>
+    </section>
 
 
-  <script>
+<script>
   $(function () {
     //Date picker
     $('#datepicker1').datepicker({
       autoclose: true,
-      date: new Date("{{ $detailpermohonan->tgl_mulai }}")
+      
     });
     $('#datepicker2').datepicker({
       autoclose: true,
@@ -233,13 +236,6 @@
 </script>
           </div>
 
-
-
-        </div>
-    </div>
-  </div>
-</div>
-</div>
 
 
 @endsection

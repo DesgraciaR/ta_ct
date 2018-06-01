@@ -30,8 +30,9 @@
                   <th>Tanggal Pengajuan</th>
                   <th>Mulai</th>
                   <th>Selesai</th>
+                  <th>Jumlah hari<th>
                   <th>Alamat</th>
-                  <th>Action</th>
+                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,6 +45,7 @@
                   <td>{{$value->tgl_pengajuan}}</td>
                   <td>{{$value->tgl_mulai_ubah?:$value->tgl_mulai}}</td>
                   <td>{{$value->tgl_selesai_ubah?:$value->tgl_selesai}}</td>
+                  <td>{{$value->jumlah_cuti}}</td>
                   <td>{{$value->alamat_cuti}}</td>
                   
                   <td>

@@ -7,6 +7,7 @@ use App\PermohonanCuti;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
 use Carbon\Carbon;
+use App\LiburModel;
 
 class PermohonancutiController extends Controller
 {
@@ -137,11 +138,38 @@ public function updateStatus_ppk($id, $status_ppk){
      */
     public function updateDetail(Request $request, $id)
     {
+
+
         $mulai = Carbon::parse(($request->tgl_mulai), 'Asia/Jakarta');
         $end = Carbon::parse(($request->tgl_selesai), 'Asia/Jakarta');
+        $period = new \DatePeriod(
+                                 new \DateTime($mulai),
+                                 new \DateInterval('P1D'),
+                                 new \DateTime(date('Y-m-d', strtotime('+1 days', strtotime($end))))
+                            );
+      $i = 0;
+      $arrTgl = array();
+      $libur = LiburModel::all();
+
+        foreach ($period as $key => $value) {
+          if($value->format('D') != 'Sat' && $value->format('D') != 'Sun') {
+              $libur = LiburModel::where('tanggal', $value->format('Y-m-d'))->count();
+
+              if($libur==0) {
+                  $arrTgl[$i] = $value->format('Y-m-d');
+                
+              }
+
+            
+          }
+          $i++;
+}
+
+
        $editpermohonan = PermohonanCuti::find($id);
        $editpermohonan->tgl_mulai_ubah = $mulai;
        $editpermohonan->tgl_selesai_ubah = $end;
+       $editpermohonan->jumlah_cuti = count($arrTgl);
        $editpermohonan->save();
        return back();
 
