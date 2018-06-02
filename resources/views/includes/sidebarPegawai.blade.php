@@ -19,14 +19,36 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
+         <li class="treeview">
+          <a href="#">
+            <span>TENTANG AKUN SAYA</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+
+          <ul class="treeview-menu">
+            <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i>Profil</a></li>
+            <li><a href="{{url('/ubahpassword')}}"><i class="fa fa-circle-o"></i>Ubah Password</a></li>
+            <li><a href="{{ route('logout')}}" onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();"><form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none">{{csrf_field()}}</form><i class="fa fa-circle-o"></i>Keluar</a></li>
+          </ul>
+        </li>
+
+     <li class="header"><b>MENU UTAMA</b></li>
+
+
+
+
+        
         <li>
           <a href="{{url('/dashboard')}}">
-            <i class="fa fa-dashboard fa-2x"></i> <span>Dashboard</span>
+            <i class="fa fa-dashboard "></i> <span>Dashboard</span>
           </a>
         </li>
         <li>
           <a href="{{url('/pengajuan')}}">
-            <i class="fa fa-files-o fa-2x "></i> <span>Pengajuan Cuti</span>
+            <i class="fa fa-files-o "></i> <span>Pengajuan Cuti</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right">{{count(\GlobalHelper::baca())}}</span>
             </span>
@@ -35,13 +57,13 @@
 
            <li>
           <a href="{{url('/ubahpassword')}}">
-            <i class="fa fa-hourglass-end fa-2x"></i> <span>Ubah Password</span>
+            <i class="fa fa-hourglass-end "></i> <span>Ubah Password</span>
           </a>
         </li>
 
         <li>
           <a href="#">
-            <i class="fa fa-history fa-2x"></i> <span>Histori</span>
+            <i class="fa fa-history"></i> <span>Histori</span>
              <span class="pull-right-container">
               <span class="label label-primary pull-right">{{count(\GlobalHelper::baca())}}</span>
             </span>

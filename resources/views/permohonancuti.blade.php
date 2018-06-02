@@ -30,7 +30,7 @@
                   <th>Tanggal Pengajuan</th>
                   <th>Mulai</th>
                   <th>Selesai</th>
-                  <th>Jumlah hari<th>
+                  <th>Jumlah hari</th>
                   <th>Alamat</th>
                   <th></th>
                 </tr>

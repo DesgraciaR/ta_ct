@@ -11,7 +11,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>Admin</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -21,17 +21,17 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li>
           <a href="#">
-            <i class="fa fa-dashboard fa-2x"></i> <span>Dashboard</span>
+            <i class="fa fa-dashboard "></i> <span>Dashboard</span>
           </a>
         </li>
         <li>
           <a href="{{url ('/daftarLibur')}}">
-            <i class="fa fa-calendar-o fa-2x"></i> <span>Data Libur Nasional</span>
+            <i class="fa fa-calendar-o "></i> <span>Data Libur Nasional</span>
           </a>
         </li>
         <li>
           <a href="{{url('daftarUser')}}">
-            <i class="fa fa-table fa-2x"></i> <span>Table Pegawai</span>
+            <i class="fa fa-table "></i> <span>Table Pegawai</span>
           </a>
         </li>
 

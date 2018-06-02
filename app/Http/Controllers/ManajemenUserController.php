@@ -36,6 +36,14 @@ class ManajemenUserController extends Controller
         return view('harilibur',compact('daftarLibur'));
      }
 
+
+
+      public function profileuser()
+    {
+        
+        return view('profil');
+     }
+
     /**
      * Show the form for creating a new resource.
      *

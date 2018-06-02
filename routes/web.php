@@ -52,6 +52,7 @@ Route::get('/daftarLibur','ManajemenUserController@libur');
 Route::get('/hapuslibur/{id}','ManajemenUserController@destroy');
 Route::get('/perbaharuilibur/{id}','ManajemenUserController@hapuslibur');
 Route::post('/tambahlibur','ManajemenUserController@store');
+Route::get('/profile','ManajemenUserController@profileuser');
 // Route::get('alert/{AlertType}','sweetalertController@alert')->name('alert')
 // Route::get('/logout',function(){
 

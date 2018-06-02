@@ -1112,7 +1112,9 @@ a:focus {
 figure {
   margin: 0;
 }
-
+img {
+  vertical-align: middle;
+}
 .img-responsive,
 .thumbnail > img,
 .thumbnail a > img,
@@ -1489,7 +1491,7 @@ blockquote .small {
   display: block;
   font-size: 80%;
   line-height: 1.42857143;
-  color: #002C54;
+  color: #777;
 }
 blockquote footer:before,
 blockquote small:before,
@@ -4163,7 +4165,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar {
   position: relative;
-  min-height: 20px;
+  min-height: 50px;
   margin-bottom: 20px;
   border: 1px solid transparent;
 }
@@ -5968,7 +5970,7 @@ button.close {
 }
 @media (min-width: 768px) {
   .modal-dialog {
-    width: 550px;
+    width: 600px;
     margin: 30px auto;
   }
   .modal-content {
