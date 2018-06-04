@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Redirect;
 use Auth;
 use Carbon\Carbon;
 use App\LiburModel;
+use App\User;
+use App\JatahcutiModel;
 
 class PermohonancutiController extends Controller
 {
@@ -64,8 +66,20 @@ class PermohonancutiController extends Controller
                $detailpermohonan->alasan_acc_ppk = $request->pesan;
 
                $detailpermohonan->tgl_status_ppk=date('Y-m-d');
+
+                $id_user = User::where('nip_baru','=',$detailpermohonan->nip_baru)->first();
+                $jatahcuti = JatahcutiModel::find($id_user)->first();
+                $jumlahCuti2 = $jatahcuti->jumlah_tahun_ini+$detailpermohonan->jumlah_cuti;
+                if ($jumlahCuti2 > 12) {
+                  $jatahcuti->jumlah_tahun_lalu = $jumlahCuti2-12;
+                  $jatahcuti->jumlah_tahun_ini = 12;
+                  $jatahcuti->save();
+                }else{
+                  $jatahcuti->jumlah_tahun_ini = $jumlahCuti2;
+                  $jatahcuti->save();
+                }
+
                $detailpermohonan->save();
-             // return back();
                return Redirect::to('permohonancuti');
 
             }else {
@@ -86,7 +100,27 @@ class PermohonancutiController extends Controller
                 $detailpermohonan->alasan_acc_atasan = $request->pesan;
 
                 $detailpermohonan->tgl_diusulkan_ppk=date('Y-m-d');
+                // $detailpermohonan->save();
+                // dd($detailpermohonan->nip_baru);
+                $id_user = User::where('nip_baru','=',$detailpermohonan->nip_baru)->first();
+                // dd($id_user->nip_baru);
+                // dd($detailpermohonan->jumlah_cuti);
+                $jatahcuti = JatahcutiModel::find($id_user)->first();
+                // dd($jatahcuti->jumlah_tahun_ini);
+                $jumlahCuti2 = $jatahcuti->jumlah_tahun_ini+$detailpermohonan->jumlah_cuti;
+                // dd($jumlahCuti2);
+                if ($jumlahCuti2 > 12) {
+                  $jatahcuti->jumlah_tahun_lalu = $jumlahCuti2-12;
+                  $jatahcuti->jumlah_tahun_ini = 12;
+                  // dd($jatahcuti->jumlah_tahun_lalu.'****'.$jatahcuti->jumlah_tahun_ini);
+                  $jatahcuti->save();
+                }else{
+                  $jatahcuti->jumlah_tahun_ini = $jumlahCuti2;
+                  $jatahcuti->save();
+                }
+                // dd($jatahcuti->jumlah_tahun_ini);
                 $detailpermohonan->save();
+                // $jatahcuti->save();
                  // return back();
                 return Redirect::to('permohonancuti');
 

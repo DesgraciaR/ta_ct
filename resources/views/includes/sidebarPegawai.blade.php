@@ -27,8 +27,9 @@
             </span>
           </a>
 
+
           <ul class="treeview-menu">
-            <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i>Profil</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>Profil</a></li>
             <li><a href="{{url('/ubahpassword')}}"><i class="fa fa-circle-o"></i>Ubah Password</a></li>
             <li><a href="{{ route('logout')}}" onclick="event.preventDefault();
                   document.getElementById('logout-form').submit();"><form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none">{{csrf_field()}}</form><i class="fa fa-circle-o"></i>Keluar</a></li>

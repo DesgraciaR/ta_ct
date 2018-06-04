@@ -71,7 +71,9 @@
                 </div>
                 <!-- /.input group -->
               </div>
+            </div>
               <!-- /.form group -->
+
               <div class="form-group">
                 <label>Tanggal Mulai</label>
 

@@ -79,8 +79,8 @@ class AjukancutiController extends Controller
           }
           $i++;
       }
-
-      if(date('Y', strtotime($mulai)) == date('Y')) {
+    
+      if(date('Y', strtotime($mulai)) == date('Y') || session()->get('data')->mk_tahun >= 1) {
         if($request->id_jenis_cuti==1){
             $jumlah_cuti=JatahcutiModel::where('nip_baru',session()->get('user')->nip_baru)->first();
     if($jumlah_cuti->jumlah_tahun_lalu > 0){ //apabila jumlah_cuti tahun lalu > 0 
@@ -129,7 +129,7 @@ class AjukancutiController extends Controller
             if($jumlah_cuti->jumlah_tahun_ini > 0){
                 $jumlah = $jumlah_cuti->jumlah_tahun_lalu + $jumlah_cuti->jumlah_tahun_ini;
                 if(count($arrTgl) <= $jumlah) {
-                    $hasil = ($jumlah_tahun_lalu - count($arrTgl)) + $jumlah_tahun_ini ;
+                    $hasil = ($jumlah_cuti->jumlah_tahun_lalu - count($arrTgl)) + $jumlah_cuti->jumlah_tahun_ini ;
                     echo $hasil ;   
 
                $cuti1 =JatahcutiModel::where('nip_baru', session()->get('user')->nip_baru)->first();
@@ -337,42 +337,14 @@ class AjukancutiController extends Controller
 
                         }
                     $permohonancuti->save();
-                    Alert::success('Data berhasil di kirim');
+                    swal("Good job!", "You clicked the button!", "success");
                     return Redirect::to('dashboard');
 
 }else{
    echo 'Tidak boleh lintas tahun';
 }
 
-                    // $permohonancuti = new PermohonanCuti;
-                    // $permohonancuti->id_jenis_cuti = $request->id_jenis_cuti;
-                    // $permohonancuti->tgl_pengajuan = $pengajuan;
-                    // $permohonancuti->tgl_mulai = $mulai;
-                    // $permohonancuti->tgl_selesai = $end;
-                    // $permohonancuti->alamat_cuti = $request->alamat;
-                    // $permohonancuti->alasan_cuti = $request->alasan;
-                    // $permohonancuti->jumlah_cuti = count($arrTgl);
-                    // $permohonancuti->noTelepon = $request->noTelepon;
-                    // $filename=time().'.'.request()->foto_bukti->getClientOriginalExtension();
-                    // if(request()->foto_bukti->move(public_path('foto_bukti'),$filename)){
-                    //       $permohonancuti->bukti_cuti = 'foto_bukti/'.$filename;     
-                    // }
-
-                    // $permohonancuti->nip_baru = $request->session()->get("data")->nip_baru;
-                    //     if(session()->get("data")->jenis_jabatan==1){
-                    //         $permohonancuti->id_atasan = $request->tujuan;
-                    //     }else{
-                    //         if( $request->tujuan==session()->get("data")->nip_atasan){
-                    //             $permohonancuti->id_atasan = $request->tujuan;
-
-                    //         }else{
-                    //             $permohonancuti->id_atasan = $request->tujuan;
-                    //         }
-
-                    //     }
-                    // $permohonancuti->save();
-                    // Alert::success('Data berhasil di kirim');
-                    // return Redirect::to('dashboard');
+                    
 }
 
 

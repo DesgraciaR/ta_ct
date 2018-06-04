@@ -41,7 +41,7 @@
                   <td>Jabatan</td>
                   <td colspan="2">{{$data->jab_olah}}</td>
                   <td>Masa Kerja</td>
-                  <td colspan="2">{{$data->mk_tahun}}</td>
+                  <td colspan="2">{{$data->mk_tahun}}Tahun {{$data->mk_bulan}}bulan</td>
                 </tr>
                 <tr>
                   <td>Unit Kerja</td>

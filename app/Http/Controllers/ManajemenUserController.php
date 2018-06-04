@@ -12,8 +12,10 @@ use App\LiburModel;
 
 use Carbon\Carbon;
 
+use Auth;
 
-
+use Hash;
+use DB;
 
 class ManajemenUserController extends Controller
 {
@@ -66,7 +68,30 @@ class ManajemenUserController extends Controller
          return back();
     }
 
+    public function ubahpassword(){
 
+         return view('ubahpassword');
+     }
+
+    public function updatepassword(Request $request){
+        $user = DB::table('tbl_user')
+        ->where('nip_baru','=',session()->get('user')->nip_baru)
+        ->select('*')
+        ->get();
+
+        // echo $user;
+        // exit();
+        // session()->get('user')->password;
+        if(Hash::check($request->old_password, session()->get('user')->password)){
+            DB::table('tbl_user')
+            ->where('nip_baru','=',session()->get('user')->nip_baru)
+            ->update(['password' => bcrypt($request->new_password)]);
+            return view('ubahpassword')->with('sukses','yes');
+        } else {
+            return view('ubahpassword')->with('gagal','yes');
+        }
+     }
+    
 
 
 
@@ -98,9 +123,17 @@ class ManajemenUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
+     public function profil()
+    {
+        return view('profil');
+     }
+
     public function show($id)
     {
-        //
+        $prof = User::find($id);
+        return view('profil',compact('prof'));
     }
 
     /**

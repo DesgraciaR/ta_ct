@@ -27,8 +27,9 @@ class AuthController extends Controller
                     }
                     if(!isset($data->status)){
                         $cek = User::find($data->nip_baru);
+                        // dd($data);
                         if(count($cek)==0){
-                               if($data->jab_olah ="KEPALA SUB BAGIAN TATA USAHA DAN RUMAH TANGGA"){
+                               if($data->jab_olah ="KEPALA BAGIAN UMUM"){
                                 $user = User::create([
                                     'nip_baru'=>$data->nip_baru,
                                     'password'=>bcrypt($data->nip_baru),
@@ -38,6 +39,7 @@ class AuthController extends Controller
 
                                 ]);
                                 }else{
+                                      // dd($data->jenis_jabatan);
                                         
                                       $user = User::create([
                                             'nip_baru'=>$data->nip_baru,
@@ -84,28 +86,7 @@ class AuthController extends Controller
          //
      }
 
-    public function ubahpassword(){
 
-         return view('ubahpassword');
-     }
 
-    public function updatepassword(Request $request){
-        $user = DB::table('tbl_user')
-        ->where('nip_baru','=',session()->get('user')->nip_baru)
-        ->select('*')
-        ->get();
 
-        // echo $user;
-        // exit();
-        // session()->get('user')->password;
-        if(Hash::check($request->old_password, session()->get('user')->password)){
-            DB::table('tbl_user')
-            ->where('nip_baru','=',session()->get('user')->nip_baru)
-            ->update(['password' => bcrypt($request->new_password)]);
-            return view('ubahpassword')->with('sukses','yes');
-        } else {
-            return view('ubahpassword')->with('gagal','yes');
-        }
-     }
-    
 }
