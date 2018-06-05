@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -13,6 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $this->cektahun();
         return view('dashboard');
     }
 

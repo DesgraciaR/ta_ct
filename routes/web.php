@@ -51,6 +51,9 @@ Route::get('/perbaharuilibur/{id}','ManajemenUserController@hapuslibur');
 Route::post('/tambahlibur','ManajemenUserController@store');
 Route::get('/profile','ManajemenUserController@profil');
 Route::get('/profil/{id}','ManajemenUserController@show') ;
+Route::get('/resetpsw/{id}','ManajemenUserController@resetpassword');
+
 Route::get('/home', 'HomeController@index')->name('home');
+
 // Route::get('alert/{AlertType}','sweetalertController@alert')->name('alert')
 // Route::get('/logout',function(){

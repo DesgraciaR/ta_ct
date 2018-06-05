@@ -79,10 +79,35 @@ class AjukancutiController extends Controller
           }
           $i++;
       }
-    
+
+$this->cektahun();
+$jumlah_cuti=JatahcutiModel::where('nip_baru',session()->get('user')->nip_baru)->first();
+
+// $datapermohonan = PermohonanCuti::where('nip_baru',session()->get('user')->nip_baru)->where('status','Ditangguhkan')->whereYear('tgl_mulai',$jumlah_cuti->tahun)->get();
+
+// $jml_ditangguhkan=0;
+//   if(count($datapermohonan) > 0){
+//     foreach ($datapermohonan as $key => $value) {
+//       $jml_ditangguhkan+=$value->jumlah_cuti;
+//     }
+
+//   }
+
+// if(date('Y') != $jumlah_cuti->tahun){
+//     $jumlah_cuti->tahun = date('Y');
+//     if($jumlah_cuti->jumlah_tahun_ini>=6){
+//       $jml_ditangguhkan+=6;
+//     }else{
+//       $jml_ditangguhkan+=$jumlah_cuti->jumlah_tahun_ini;
+//     }
+
+//     $jumlah_cuti->jumlah_tahun_lalu = $jml_ditangguhkan;
+//     $jumlah_cuti->jumlah_tahun_ini = 12;
+//     $jumlah_cuti->save();
+// }
+
       if(date('Y', strtotime($mulai)) == date('Y') || session()->get('data')->mk_tahun >= 1) {
         if($request->id_jenis_cuti==1){
-            $jumlah_cuti=JatahcutiModel::where('nip_baru',session()->get('user')->nip_baru)->first();
     if($jumlah_cuti->jumlah_tahun_lalu > 0){ //apabila jumlah_cuti tahun lalu > 0 
         if(count($arrTgl) <= $jumlah_cuti->jumlah_tahun_lalu ) {
             //apila jumlah cuti tahun lalu lebih besar / =  jumlah hari cuti yang diambil

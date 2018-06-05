@@ -44,7 +44,7 @@
               
                   <td>
                        <div class="btn-group pull-right" role="group" aria-label="...">
-                         <a data-target="#modal-default" data-toggle="modal" class="btn btn-block btn-primary"><i class="fa fa-edit"></i>Reset Password</a> 
+                         <a href="" class="btn btn-block btn-primary"><i class="fa fa-edit"></i>Reset Password</a> 
                       </div>
                   </td>
                 </tr>
@@ -59,55 +59,7 @@
           <!-- /.box -->
         </div>
         <!-- /.col -->
-             <div class="modal fade" id="modal-default">
-        <div class="modal-dialog">
-          <div class="modal-content">    
-            <div class="modal-body">
-                
-              
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="box">
-                    <form method="post" action="">
-                      {{csrf_field()}}
-                      <div class="box-header with-border">
-                        <h3 class="box-title">Reset Password</h3>
-                      </div>
-                      
-                      <div class="box-body">
-                        <div class="col-md-12">
-                            
-                         <div class="form-group">
-                            <input type="password" name="new_password" placeholder="Masukan Password Baru" class="form-control">
-                         </div>
-                        <div class="form-group">
-                             <input type="password" id="password-confirm" name="new_password_confirmation" placeholder="Konfirmasi Password Baru" class="form-control">
-                        </div>
-                          </div>
-                           
-                        </div>
-                      </div>
-
-                      <div class="modal-footer">
-                      
-                          <button type="button" class="btn btn-primary" data-dismiss="modal">Tutup</button> 
-                          <button type="submit" class="btn btn-primary">Simpan</button>
-                      </div>
-
-                       
-                      </form>
-                    </div>
-                   </div>
-                 </div>
-               </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-      </div>
+             
       <!-- /.row -->
     </section>
     <!-- /.

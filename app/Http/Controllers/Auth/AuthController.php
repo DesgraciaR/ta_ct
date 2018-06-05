@@ -12,6 +12,13 @@ use DB;
 
 class AuthController extends Controller
 {
+
+     public function index()
+    {
+        $this->cektahun();
+    
+    }
+
 	protected $username = 'nip_baru';
 	public function showLoginForm(){
 		return view('include.login');

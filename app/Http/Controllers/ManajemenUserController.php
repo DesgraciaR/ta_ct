@@ -52,22 +52,19 @@ class ManajemenUserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function resetpassword(Request $request, $id){
+    public function resetpassword(Request $request){
 
-         $validator = validator::make($request->all(), [
-            'password' => 'required|string|min:6|confirmed'
-         ]);
+     // $user = DB::table('tbl_user')
+     //    ->where('nip_baru','=',session()->get('user')->nip_baru)
+     //    ->select('*')
+     //    ->get();
+     
+     //  $resetpsw = User::find($id);
+     //  $resetpsw->password = bcrypt($user->nip_baru);
 
-         $reset =User::find($id);
-         if($validator->fails()) {
-            return redirect('daftarUser'.$user->id)->withError($valiator)->withInput();
-         }
 
-         $User->password = bcrypt(Input::get('password'));
-         $User->save();
-         return back();
+        
     }
-
     public function ubahpassword(){
 
          return view('ubahpassword');

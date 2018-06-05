@@ -55,18 +55,12 @@
                   <td>Nama Atasan Atasan</td>
                   <td>{{$data->nama_atasan_atasan}}</td>
                 </tr>
-
-
-                  
-                 
                   </table>
                 </div>
 
           </div>
         </div>
-
-
-                
+   
       </div>
       
     </section>
