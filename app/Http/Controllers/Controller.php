@@ -20,13 +20,13 @@ class Controller extends BaseController
     public function cektahun(){
         $jumlah_cuti=JatahcutiModel::where('nip_baru',session()->get('user')->nip_baru)->first();
 
-$datapermohonan = PermohonanCuti::where('nip_baru',session()->get('user')->nip_baru)->where('status','Ditangguhkan')->whereYear('tgl_mulai',$jumlah_cuti->tahun)->get();
+		$datapermohonan = PermohonanCuti::where('nip_baru',session()->get('user')->nip_baru)->where('status_ppk','Ditangguhkan')->whereYear('tgl_mulai',$jumlah_cuti->tahun)->get();
 
-$jml_ditangguhkan=0;
-  if(count($datapermohonan) > 0){
-    foreach ($datapermohonan as $key => $value) {
-      $jml_ditangguhkan+=$value->jumlah_cuti;
-    }
+	 $jml_ditangguhkan=0;
+		if(count($datapermohonan) > 0){
+		foreach ($datapermohonan as $key => $value) {
+  		$jml_ditangguhkan+=$value->jumlah_cuti;
+}
 
   }
 

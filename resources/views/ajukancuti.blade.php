@@ -1,6 +1,18 @@
 <?php $active ='home' ; ?>
 @extends('layouts.page')
 @section('content')
+
+
+@if ($errors->any())
+  <div class="alert alert-danger">
+  <ul>
+  @foreach ($errors->all() as $message) 
+    <li>{{ $message }}</li>
+  @endforeach
+  </ul>
+  </div>
+@endif
+
   <section class="content-header">
       <h1>
         Ajukan Cuti
@@ -18,7 +30,7 @@
       
       <!-- /.box -->
    
-      {{ Form::open(array('url'=>'ajukancuti','files'=>true)) }}
+      {{ Form::open(array('url'=>'ajukancutii','files'=>true)) }}
       <div class="row">
         <!-- /.col (left) -->
 

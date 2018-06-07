@@ -3,17 +3,6 @@
 @section('content')
 
 
-<script>
-function printContent(modal-body){
-    var restorepage = document.body.innerHTML;
-    var printcontent = document.getElementById(el).innerHTML;
-    document.body.innerHTML = printcontent;
-    window.print();
-    document.body.innerHTML = restorepage;
-}
-</script>
-
-
  <section class="sidebar">
     <section class="content-header">
       <h1>
@@ -93,7 +82,7 @@ function printContent(modal-body){
                           </div>
                           <!-- /.box-header -->
                           <div class="box-body">
-                            <table border="1" width="100%">
+                            <table class="example1" width="100%">
                               <tr>
                                 <th colspan="5">I.DATA PEGAWAI</th>
                               </tr>
@@ -243,20 +232,8 @@ function printContent(modal-body){
                         </div>
                       </div>
                     </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tutup</button> 
-                    <!--   <a type="button" class="btn btn-primary" href ="{{url('/cetak')}}">Print</a> -->
-                    </div>
-
-                    <div>
-                      <button onclick="printcontent('modal-body')" type="button" class="btn btn-default pull-left">Cetak</button> 
-                    <!--   <a type="button" class="btn btn-primary" href ="{{url('/cetak')}}">Print</a> -->
-                    </div>
-                  </div>
-                  <!-- /.modal-content -->
+                  </div>  
                 </div>
-                <!-- /.modal-dialog -->
               </div>
             </div>
             <!-- /.box-body -->
@@ -266,4 +243,20 @@ function printContent(modal-body){
         <!-- /.col -->
       </div>
       <!-- /.row -->
+    </div>
+
+
+    <script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
  @endsection

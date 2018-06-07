@@ -3,15 +3,7 @@
 @section('content')
 
 
-<script>
-function printContent(el){
-    var restorepage = document.body.innerHTML;
-    var printcontent = document.getElementById(el).innerHTML;
-    document.body.innerHTML = printcontent;
-    window.print();
-    document.body.innerHTML = restorepage;
-}
-</script>
+
  <section class="sidebar">
     <section class="content-header">
       <h1>
@@ -111,7 +103,29 @@ function printContent(el){
       </div>
       <!-- /.row -->
     </div>
+<script>
 
+swal({
+  title: "Are you sure?",
+  text: "Once deleted, you will not be able to recover this imaginary file!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    swal("Poof! Your imaginary file has been deleted!", {
+      icon: "success",
+    });
+  } else {
+    swal("Your imaginary file is safe!");
+  }
+});
+
+
+
+
+</script>
 
 <script>
   $(function () {

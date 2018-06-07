@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\PermohonanCuti;
-
-use App\JatahcutiModel;
-
-class PengajuanController extends Controller
+class FlashMessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +13,12 @@ class PengajuanController extends Controller
      */
     public function index()
     {
-        $pengajuan=PermohonanCuti::where('nip_baru',session()->get("data")->nip_baru)->get();
-        return view('pengajuan',compact('pengajuan'));
+        return view('pesan');
+    }
+
+    public function pesan()
+    {
+   return redirect('/pesan')->with(['success' => 'Pesan Berhasil']);
     }
 
     /**
@@ -26,8 +26,6 @@ class PengajuanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
     public function create()
     {
         //
@@ -73,16 +71,9 @@ class PengajuanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateStatusbaca($id, $status_baca)
+    public function update(Request $request, $id)
     {
-         
-        $pengajuan = PermohonanCuti::find($id);
-        $pengajuan->status_baca=$status_baca;
-        $pengajuan->save();
-         return back();
-         // return Redirect::to('permohonancuti');
-    
-
+        //
     }
 
     /**
@@ -93,13 +84,6 @@ class PengajuanController extends Controller
      */
     public function destroy($id)
     {
-        PermohonanCuti::find($id)->delete();
-       
-
-
-        return redirect ('pengajuan') ; 
-
-
-
+        //
     }
 }

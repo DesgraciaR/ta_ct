@@ -4,6 +4,23 @@
 @php($data = \GlobalHelper::accessdata($cetakform->nip_baru))
 
 
+
+<script>
+function printContent(el){
+    var restorepage = document.body.innerHTML;
+    var printcontent = document.getElementById(el).innerHTML;
+    document.body.innerHTML = printcontent;
+    window.print();
+    document.body.innerHTML = restorepage;
+}
+</script>
+
+
+  <div class="btn-group" role="group" aria-label="...">
+                    <a href="" onclick="window.print()" class="btn btn-sm btn-primary"><i class="fa fa-print"></i>Cetak</a>
+                    </div>
+
+
 <div class="box" style="width: 100%; position: center;">
 <div class="coll-md-12">
   <div class="coll-md-4 pull-right">
@@ -88,7 +105,7 @@
                 </tr>
                 <tr>
                   <td>Selama</td>
-                  <td>*</td>
+                  <td>{{$cetakform->jumlah_cuti}}</td>
                   <td>Mulai tanggal</td>
                   <td>{{$cetakform->tgl_mulai_ubah?:$cetakform->tgl_mulai}}</td>
                   <td>s/d</td>
@@ -159,11 +176,13 @@
                </tr>
                 <tr>
                 <td>
-                 @if($cetakform->status == 'Diterima' && $cetakform->tgl_mulai_ubah == NULL && $cetakform->tgl_selesai_ubah == NULL)<input type="checkbox" class="minimal" checked>
-                 @endif</td>
+                 @if($cetakform->status == 'Diterima' && $cetakform->tgl_mulai_ubah == NULL && $cetakform->tgl_selesai_ubah == NULL)<input type="checkbox" class="minimal" checked></td>
+                 @else
                  <td>
-                    @if($cetakform->status == 'Diterima')<input type="checkbox" class="minimal" checked>
+                  ($cetakform->status == 'Diterima')<input type="checkbox" class="minimal" checked>
                  @endif</td>
+
+
                  <td>@if($cetakform->status == 'Ditangguhkan')<input type="checkbox" class="minimal" checked>
                  @endif </td>
                  <td>@if($cetakform->status == 'Ditolak')<input type="checkbox" class="minimal" checked>
@@ -198,15 +217,15 @@
                </tr>
                <tr>
                 <td>
-                 @if($cetakform->status_ppk == 'Diterima' && $cetakform->tgl_mulai_ubah == NULL && $cetakform->tgl_selesai_ubah == NULL)<input type="checkbox" class="minimal" checked>
-                 @endif</td>
-                 <td>
-                    @if($cetakform->status_ppk == 'Diterima')<input type="checkbox" class="minimal" checked>
-                 @endif</td>
-                 <td>@if($cetakform->status_ppk == 'Ditangguhkan')<input type="checkbox" class="minimal" checked>
-                 @endif </td>
-                 <td>@if($cetakform->status_ppk == 'Ditolak')<input type="checkbox" class="minimal" checked>
-                 @endif</td>
+                 @if($cetakform->status_ppk == 'Diterima' && $cetakform->tgl_mulai_ubah == NULL && $cetakform->tgl_selesai_ubah == NULL)<input type="checkbox" class="minimal" checked></td>
+                @else
+                 <td>($cetakform->status_ppk == 'Diterima')<input type="checkbox" class="minimal" checked></td>
+                 @endif
+
+                 <td>@if($cetakform->status_ppk == 'Ditangguhkan')<input type="checkbox" class="minimal" checked></td>
+                 @endif 
+                 <td>@if($cetakform->status_ppk == 'Ditolak')<input type="checkbox" class="minimal" checked></td>
+                 @endif
                  <td colspan="3"></td>
               </tr>
               <tr>

@@ -60,15 +60,15 @@
 <!-- bootstrap datepicker -->
 <script src="{{ url ('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script><!-- 
 sweetAlert -->
-<script type="{{ url('/dist/js/sweetalert.js') }}"></script>
-<script type="{{ url('/dist/js/sweetalert.min.js') }}"></script>
+<!-- <script type="{{ url('/dist/js/sweetalert.js') }}"></script>
+<script type="{{ url('/dist/js/sweetalert.min.js') }}"></script> -->
 
 <script src="{{ url ('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url ('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 
+<script src="{{ url ('vendor/sweetalert/sweetalert.min.js') }}"></script>
 
 <!-- Page script -->
 <script>

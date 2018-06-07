@@ -4,6 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+
+use App\PermohonanCuti;
+
+use DB;
+use App\JatahcutiModel;
+
+
 class DashboardController extends Controller
 {
 
@@ -14,7 +22,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
+
         $this->cektahun();
+
+
+        $jatah = DB::table('tbl_jatah_cuti')
+        ->select(DB::raw('(jumlah_tahun_lalu + jumlah_tahun_ini) as jumlah'))
+        ->where('nip_baru', session()->get('user')->nip_baru)
+        ->get();
+
         return view('dashboard');
     }
 

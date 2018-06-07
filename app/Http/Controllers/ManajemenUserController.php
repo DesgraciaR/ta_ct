@@ -31,7 +31,6 @@ class ManajemenUserController extends Controller
      }
 
 
-
      public function libur()
     {
         $daftarLibur =LiburModel::all();
@@ -52,19 +51,15 @@ class ManajemenUserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function resetpassword(Request $request){
+    public function resetpassword($nip){
 
-     // $user = DB::table('tbl_user')
-     //    ->where('nip_baru','=',session()->get('user')->nip_baru)
-     //    ->select('*')
-     //    ->get();
+        $user = DB::table('tbl_user')
+        ->where('nip_baru', $nip)
+        ->update(['password' => bcrypt($nip)]);
+        return redirect('daftarUser')->with('sukses');
      
-     //  $resetpsw = User::find($id);
-     //  $resetpsw->password = bcrypt($user->nip_baru);
-
-
-        
     }
+
     public function ubahpassword(){
 
          return view('ubahpassword');

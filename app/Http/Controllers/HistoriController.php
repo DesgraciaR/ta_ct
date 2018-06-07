@@ -17,9 +17,8 @@ class HistoriController extends Controller
      */
     public function histori()
     {
-         $historicuti=PermohonanCuti::where('nip_baru',session()->get("data")->nip_baru)->get()->where('status_baca','0');
-        return view('historicuti',compact('historicuti'));
-
+          // echo session()->get('user')->ppk;
+        
     }
 
 

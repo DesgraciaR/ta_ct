@@ -47,6 +47,7 @@
             <i class="fa fa-files-o "></i> <span>Pengajuan Cuti</span>
           </a>
         </li>
+        
           <li>
           <a href="{{url('/permohonancuti')}}">
             <i class="fa fa-edit "></i> <span>Data Permohonan Cuti</span>
@@ -56,7 +57,7 @@
           </a>
         </li>
          <li>
-          <a href="#">
+          <a href="{{ url('/histori')}}">
             <i class="fa fa-history "></i> <span>Histori</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right">{{count(\GlobalHelper::baca())}}</span>

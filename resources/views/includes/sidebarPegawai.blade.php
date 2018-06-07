@@ -37,16 +37,13 @@
         </li>
 
      <li class="header"><b>MENU UTAMA</b></li>
-
-
-
-
-        
         <li>
           <a href="{{url('/dashboard')}}">
             <i class="fa fa-dashboard "></i> <span>Dashboard</span>
+            <span class="pull-right-container"></span>
           </a>
         </li>
+
         <li>
           <a href="{{url('/pengajuan')}}">
             <i class="fa fa-files-o "></i> <span>Pengajuan Cuti</span>
@@ -56,11 +53,7 @@
           </a>
         </li>
 
-           <li>
-          <a href="{{url('/ubahpassword')}}">
-            <i class="fa fa-hourglass-end "></i> <span>Ubah Password</span>
-          </a>
-        </li>
+    
 
         <li>
           <a href="#">

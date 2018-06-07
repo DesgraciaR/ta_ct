@@ -5,6 +5,7 @@
 
 
 <!--  -->
+
  
  <section class="sidebar">
     <section class="content-header">
@@ -44,7 +45,7 @@
               
                   <td>
                        <div class="btn-group pull-right" role="group" aria-label="...">
-                         <a href="" class="btn btn-block btn-primary"><i class="fa fa-edit"></i>Reset Password</a> 
+                         <a href="{{url('/resetpsw/') . '/' . $value->nip_baru}}" class="btn btn-block btn-primary"><i class="fa fa-edit"></i>Reset Password</a> 
                       </div>
                   </td>
                 </tr>

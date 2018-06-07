@@ -1,6 +1,6 @@
 <?php $active ='home'; ?>
 
-  @extends('layouts.page')
+@extends('layouts.page')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
     <!-- Content Header (Page header) -->
@@ -17,9 +17,16 @@
 
     <!-- Main content -->
     <section class="content">
-     <div class="row">
-
-      <div class="col-md-4 col-sm-6 col-xs-12">
+    <div class="info">
+      <div class="col-md-4 pull-left" style="padding-top: 0px">
+        <div class="callout callout-warning">
+       
+          <h4>Selamat Datang, {{session()->get('user')->nama}}</h4>
+        
+        </div>
+      </div>
+     <div class="row col-md-12">
+      <div class="col-md-4 col-sm-6">
           <div class="info-box bg-aqua">
             <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
 
@@ -89,11 +96,12 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Jatah Cuti</span>
-              <span class="info-box-number">41,410</span>
-
+              <span class="info-box-number"></span>
+              
               <div class="progress">
                 <div class="progress-bar" style="width: 70%"></div>
               </div>
+
                   <span class="progress-description">
                     70% Increase in 30 Days
                   </span>

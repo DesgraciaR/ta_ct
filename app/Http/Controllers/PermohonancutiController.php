@@ -19,16 +19,19 @@ class PermohonancutiController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
-        // echo session()->get('user')->ppk;
+         
+          // echo session()->get('user')->ppk;
         if(session()->get('user')->ppk == '1'){
-           $permohonancuti=PermohonanCuti::where('status','Diterima')->orWhere('status','Ditangguhkan')->get()->where('status_ppk',NULL);
-           return view('permohonancuti',compact('permohonancuti'));
-
-
+          $user = User::where('ppk', '1')->first()->nip_baru;
+          $permohonancuti=PermohonanCuti::where('status','Diterima')->orWhere('status','Ditangguhkan')->orWhere('id_atasan', $user)->get()->where('status_ppk',NULL);
+          return view('permohonancuti',compact('permohonancuti'));
        }else{
-        $permohonancuti=PermohonanCuti::where('id_atasan',session()->get("data")->nip_baru)->get()->where('status',NULL);
+          
+        $permohonancuti=PermohonanCuti::where('id_atasan',session()->get('data')->nip_baru)->get()->where('status',NULL);
         return view('permohonancuti',compact('permohonancuti'));
+       
     }
 
 }
@@ -83,7 +86,18 @@ class PermohonancutiController extends Controller
                return Redirect::to('permohonancuti');
 
             }else {
+                $cekStatus = PermohonanCuti::where('id_permohonan_cuti', $id)
+                ->where('status', NULL)
+                ->orWhere('tgl_diusulkan_ppk', NULL)
+                ->first();
+
                $detailpermohonan = PermohonanCuti::find($id);
+                  //apabila id_permohonan_cuti memiliki status NULL atau tgl_diusulkan_ppk NULL
+                  if(count($cekStatus) > 0) {
+                      $detailpermohonan->status='Diterima';
+                      $detailpermohonan->tgl_diusulkan_ppk=date('Y-m-d');
+
+                  }
                $detailpermohonan->status_ppk=$request->tindakan;
                $detailpermohonan->alasan_acc_ppk = $request->pesan;
 
@@ -100,11 +114,7 @@ class PermohonancutiController extends Controller
                 $detailpermohonan->alasan_acc_atasan = $request->pesan;
 
                 $detailpermohonan->tgl_diusulkan_ppk=date('Y-m-d');
-                // $detailpermohonan->save();
-                // dd($detailpermohonan->nip_baru);
                 $id_user = User::where('nip_baru','=',$detailpermohonan->nip_baru)->first();
-                // dd($id_user->nip_baru);
-                // dd($detailpermohonan->jumlah_cuti);
                 $jatahcuti = JatahcutiModel::find($id_user)->first();
                 // dd($jatahcuti->jumlah_tahun_ini);
                 $jumlahCuti2 = $jatahcuti->jumlah_tahun_ini+$detailpermohonan->jumlah_cuti;
