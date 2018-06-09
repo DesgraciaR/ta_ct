@@ -94,10 +94,10 @@ class AjukancutiController extends Controller
                 $hasil = $jumlah_cuti->jumlah_tahun_lalu - count($arrTgl) ;
                 echo $hasil ; 
 
-                $cuti1 =JatahcutiModel::where('nip_baru', session()->get('user')->nip_baru)->first();
-                $cuti = JatahcutiModel::find($cuti1->id_jatah);
-                $cuti->jumlah_tahun_lalu=$hasil;
-                $cuti->save();
+                // $cuti1 =JatahcutiModel::where('nip_baru', session()->get('user')->nip_baru)->first();
+                // $cuti = JatahcutiModel::find($cuti1->id_jatah);
+                // $cuti->jumlah_tahun_lalu=$hasil;
+                // $cuti->save();
 
                 $permohonancuti = new PermohonanCuti;
                 $permohonancuti->id_jenis_cuti = $request->id_jenis_cuti;
@@ -126,24 +126,24 @@ class AjukancutiController extends Controller
 
                     }
                       $permohonancuti->save();
-                      Alert::success('Data berhasil di kirim');
-                      return Redirect::to('dashboard');    
+                     
+                      return Redirect::to('dashboard')->with(session()->flash('update', ''));   
               
               }else{
-                       // $hasil = ($jumlah_cuti->jumlah_tahun_lalu + $jumlah_cuti->jumlah_tahun_ini) - count($arrTgl) ;
-                      //apila jumlah cuti tahun lalu < jumlah hari cuti yang diambil
+                    
+                //apila jumlah cuti tahun lalu < jumlah hari cuti yang diambil
                 if($jumlah_cuti->jumlah_tahun_ini > 0){
                   $jumlah = $jumlah_cuti->jumlah_tahun_lalu + $jumlah_cuti->jumlah_tahun_ini;
                   if(count($arrTgl) <= $jumlah) {
                     $hasil = ($jumlah_cuti->jumlah_tahun_lalu - count($arrTgl)) + $jumlah_cuti->jumlah_tahun_ini ;
                     echo $hasil ;   
 
-                    $cuti1 =JatahcutiModel::where('nip_baru', session()->get('user')->nip_baru)->first();
-                    $cuti = JatahcutiModel::find($cuti1->id_jatah);
-                    $cuti->jumlah_tahun_lalu=0;
-                    $cuti->jumlah_tahun_ini=$hasil;
+                    // $cuti1 =JatahcutiModel::where('nip_baru', session()->get('user')->nip_baru)->first();
+                    // $cuti = JatahcutiModel::find($cuti1->id_jatah);
+                    // $cuti->jumlah_tahun_lalu=0;
+                    // $cuti->jumlah_tahun_ini=$hasil;
 
-                    $cuti->save();
+                    // $cuti->save();
                       
                     $permohonancuti = new PermohonanCuti;
                     $permohonancuti->id_jenis_cuti = $request->id_jenis_cuti;
@@ -192,11 +192,11 @@ class AjukancutiController extends Controller
                     $hasil = $jumlah_cuti->jumlah_tahun_ini - count($arrTgl);
                     echo $hasil ; 
 
-                    $cuti1 =JatahcutiModel::where('nip_baru', session()->get('user')->nip_baru)->first();
-                    $cuti = JatahcutiModel::find($cuti1->id_jatah);
-                    $cuti->jumlah_tahun_ini=$hasil;
+                    // $cuti1 =JatahcutiModel::where('nip_baru', session()->get('user')->nip_baru)->first();
+                    // $cuti = JatahcutiModel::find($cuti1->id_jatah);
+                    // $cuti->jumlah_tahun_ini=$hasil;
 
-                    $cuti->save();
+                    // $cuti->save();
                       
                     $permohonancuti = new PermohonanCuti;
                     $permohonancuti->id_jenis_cuti = $request->id_jenis_cuti;

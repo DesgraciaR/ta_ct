@@ -17,8 +17,6 @@ Route::post('auth','Auth\AuthController@login');
 
 Auth::routes();
 
-Route::get('/ubahpassword','ManajemenUserController@ubahpassword');
-Route::post('/ubahpassword/save','ManajemenUserController@updatepassword');
 
 Route::get('/halamanAdmin','HalamanAdminController@index');
 Route::get('/halamanKepala','HalamanKepalaController@index')->middleware('kepala');
@@ -38,7 +36,6 @@ Route::get('/detailcuti/{id}','PermohonancutiController@show')->middleware('kepa
 Route::get('/ubahstatus_ppk/{id}/{status_ppk}','PermohonancutiController@updateStatus_ppk')->middleware('kepala');
 Route::post('/ajukancutii','AjukancutiController@store')->middleware('authlogin');
 Route::get('/delete/{id}', 'PengajuanController@destroy')->middleware('authlogin');
-
 Route::get('/ubahstatusbaca/{id}/{status_baca}','PengajuanController@updateStatusbaca');
 Route::get('/cetak/{id}','PrintController@show');
 
@@ -49,17 +46,26 @@ Route::get('/daftarLibur','ManajemenUserController@libur');
 Route::get('/hapuslibur/{id}','ManajemenUserController@destroy');
 Route::get('/perbaharuilibur/{id}','ManajemenUserController@hapuslibur');
 Route::post('/tambahlibur','ManajemenUserController@store');
+Route::get('/ubahpassword','ManajemenUserController@ubahpassword');
+Route::post('/ubahpassword/save','ManajemenUserController@updatepassword');
 Route::get('/profile','ManajemenUserController@profil');
 Route::get('/profil/{id}','ManajemenUserController@show') ;
 Route::get('/resetpsw/{nip}','ManajemenUserController@resetpassword');
+Route::post('/updatelibur/{id}','ManajemenUserController@updatelibur');
 
-Route::get('/pesan', 'FlashMessageController@index');
-Route::get('/get-pesan', 'FlashMessageController@pesan');
+
+Route::resource('/jatah_cuti','JatahcutiController');
+Route::get('/jatahcuti','JatahcutiController@index');
+Route::post('/tambahjatah','JatahcutiController@store');
+Route::post('/editjatah/{id}','JatahcutiController@updatejatah');
+Route::get('/hapusjatah/{id}','JatahcutiController@destroy');
+
+
+Route::get('/admindashboard','AdmindashboardController@index');
 
 
 
 Route::get('/histori','HistoriController@histori');
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::get('alert/{AlertType}','sweetalertController@alert')->name('alert')

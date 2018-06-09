@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\PermohonanCuti;
-
 use App\JatahcutiModel;
 
-use SoftDeletes;
+use App\User;
 
-class PengajuanController extends Controller
+class JatahcutiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +17,17 @@ class PengajuanController extends Controller
      */
     public function index()
     {
-        $pengajuan=PermohonanCuti::where('nip_baru',session()->get("data")->nip_baru)->get();
-        return view('pengajuan',compact('pengajuan'));
+        $jatah = JatahcutiModel::all() ;
+        return view('jatahcuti', compact('jatah'));
+
+    }
+
+
+    public function user()
+    {
+       
+        // $user = User::all();
+        // return view('jatahcuti')->with('user',$nip_baru);
     }
 
     /**
@@ -28,11 +35,9 @@ class PengajuanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
     public function create()
     {
-        //
+       
     }
 
     /**
@@ -43,7 +48,15 @@ class PengajuanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $jatahcuti = new JatahcutiModel;
+        $jatahcuti->nip_baru = $request->nip_baru ;
+        $jatahcuti->tahun = $request->tahun ;
+        $jatahcuti->jumlah_tahun_lalu = $request->jumlah_tahun_lalu;
+        $jatahcuti->jumlah_tahun_ini = $request->jumlah_tahun_ini;
+        
+        $jatahcuti->save();
+
+        return back();
     }
 
     /**
@@ -65,7 +78,9 @@ class PengajuanController extends Controller
      */
     public function edit($id)
     {
-        //
+
+
+
     }
 
     /**
@@ -75,16 +90,15 @@ class PengajuanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateStatusbaca($id, $status_baca)
+    public function updatejatah(Request $request, $id)
     {
-         
-        $pengajuan = PermohonanCuti::find($id);
-        $pengajuan->status_baca=$status_baca;
-        $pengajuan->save();
-         return back();
-         // return Redirect::to('permohonancuti');
-    
-
+        $editjatah=JatahcutiModel::find($id);
+        $editjatah->nip_baru =$request->nip_baru;
+        $editjatah->tahun =$request->tahun;
+        $editjatah->jumlah_tahun_ini =$request->jumlah_tahun_ini;
+        $editjatah->jumlah_tahun_lalu =$request->jumlah_tahun_lalu;
+        $editjatah->save();
+        return back();
     }
 
     /**
@@ -95,14 +109,10 @@ class PengajuanController extends Controller
      */
     public function destroy($id)
     {
-        // PermohonanCuti::find($id)->delete();
-        // return redirect ('pengajuan') ; 
-
-        $hapus = PermohonanCuti::find($id);
+        
+        $hapus = JatahcutiModel::find($id);
         $hapus->delete();
         return back();
-
-
 
     }
 }

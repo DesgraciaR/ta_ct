@@ -1,4 +1,4 @@
-<?php $active ='home'; ?>
+c<?php $active ='home'; ?>
 @extends('layouts.page')
 @section('content')
 
@@ -36,7 +36,7 @@
                   <th>Jumlah Hari</th>
                   <th>Keputusan Atasan Langsung</th>
                   <th>Keputusan KBTU</th>
-                  <th></th>
+                  <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,17 +47,28 @@
                   <td>{{$value->tgl_selesai_ubah?:$value->tgl_selesai}}</td>
                   <td>{{$value->jumlah_cuti}}</td>
                   <td>
+
                       @if($value->status=='Diterima')
                         <span class="label label-success pull-left">{{$value->status}}</span>
-                      @else
+                      @endif
+                      @if($value->status=='Ditolak')
                         <span class="label label-danger pull-left">{{$value->status}}</span>
+                      @endif
+
+                      @if($value->status== NULL)
+                      <span class="label label-warning pull-left">Menunggu</span>
                       @endif
                   </td>
                   <td>
                       @if($value->status_ppk=='Diterima')
                         <span class="label label-success pull-left">{{$value->status_ppk}}</span>
-                      @else
+                      @endif
+                       @if($value->status_ppk=='Ditolk')
                         <span class="label label-danger pull-left">{{$value->status_ppk}}</span>
+                      @endif
+
+                      @if($value->status== NULL)
+                      <span class="label label-warning pull-left">Menunggu</span>
                       @endif
                   </td>
 
@@ -66,28 +77,31 @@
                     <div class="btn-group" role="group" aria-label="...">
                     <a href="{{url('/cetak/'.$value->id_permohonan_cuti)}}" class="btn btn-sm btn-primary"><i class="fa fa-print"></i>Cetak</a>
                     </div>
-
+                    
                     <div class="btn-group" role="group" aria-label="...">
                     <a href="{{url('/cetak/'.$value->id_permohonan_cuti)}}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i>Lihat</a>
                     </div>
 
-                    <div class="btn-group" role="group" aria-label="...">
-                    <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-block btn-primary"><i class="fa fa-trash">Hapus</i></a>
-                    </div>
+                   <!--  <div class="btn-group" role="group" aria-label="...">
+                    <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-sm btn-primary"><i class="fa fa-trash">Hapus</i></a>
+                    </div> -->
 
                     @elseif($value->status =='Ditolak' || $value->status_ppk =='Ditolak')
-                     <div class="btn-group" role="group" aria-label="...">
-                    <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-block btn-primary"><i class="fa fa-trash">Hapus</i></a>
-                  </div>
+                    <div class="btn-group" role="group" aria-label="...">
+                    <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-sm btn-primary"><i class="fa fa-trash">Hapus</i></a>
+                     </div>
 
-                 @elseif($value->status == NULL || $value->status_ppk == NULL)
-                   <div class="btn-group" role="group" aria-label="...">
-                  <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-sm btn-success"><i class=" fa fa-close">Batalkan</i></a>
-                </div>
+                     @elseif($value->status == NULL || $value->status_ppk == NULL)
+                    <div class="btn-group" role="group" aria-label="...">
+                    <a href="{{url('/delete/'.$value->id_permohonan_cuti)}}" class="btn btn-sm btn-success"><i class=" fa fa-close">Batalkan</i></a>
+                     </div>
+                  @endif
 
             
 
-                @endif
+            
+
+          
                 
                 </td>
                 </tr>
@@ -103,28 +117,19 @@
       </div>
       <!-- /.row -->
     </div>
-<script>
+<script type="text/javascript">
+  $('.js-aset').select2();
 
-swal({
-  title: "Are you sure?",
-  text: "Once deleted, you will not be able to recover this imaginary file!",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
-    swal("Poof! Your imaginary file has been deleted!", {
-      icon: "success",
-    });
-  } else {
-    swal("Your imaginary file is safe!");
-  }
-});
+  $('.delete').on("click",function(store){
+    swal({
+      title:"Deleted",
+      text:"Data Permohonan dihapus",
+      icon:"success",
+      button:false,
+      dangerMode: false,
+    })
 
-
-
-
+  });
 </script>
 
 <script>

@@ -146,9 +146,15 @@ class ManajemenUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updatelibur(Request $request, $id)
     {
-        //
+        $libur= LiburModel::find($id);
+        $tgl = Carbon::parse(($request->tgl_libur), 'Asia/Jakarta');
+        $libur->tanggal = $tgl;
+        $libur->ket_libur = $request->keterangan;
+        $libur->save();
+        return back();
+
     }
 
     /**

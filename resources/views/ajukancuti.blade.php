@@ -146,7 +146,7 @@
               </div>
 
               <div>
-                <button type="#" class="btn btn-primary" name="kirim">Submit</button>
+                <button type="#" class="btn btn-primary" name="kirim">Kirim</button>
                 <div class="btn-group" role="group" aria-label="...">
                   <a href="{{url('/pengajuan')}}" class="btn btn-primary">Batal</i></a></div>
                 <!--   <a href="#" class="btn btn-sm btn-danger"><i class="fa fa-close"></i></a> -->
@@ -168,9 +168,7 @@
     <script>
   $(function () {
     //Date picker
-    $('#datepicker1').datepicker({
-      autoclose: true
-    });
+    $('#datepicker1').datepicker('setDate',new Date());
     $('#datepicker2').datepicker({
       autoclose: true
     });
@@ -180,6 +178,20 @@
  
   })
 
+</script>
+<script type="text/javascript">
+  $('.js-aset').select2();
+
+  $('.add').on("click",function(store){
+    SWAL({
+      title:"Success",
+      text:"Permohonan Cuti Terkirim",
+      icon:"success",
+      button:false,
+      dangerMode: false,
+    })
+
+  });
 </script>
 
 

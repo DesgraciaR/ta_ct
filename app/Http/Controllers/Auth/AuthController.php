@@ -75,10 +75,7 @@ class AuthController extends Controller
 
                     }else{
                         return back()->withErrors(['error','NIP / Password salah']);        
-                    }
-                
-
-                    
+                    }     
         
                 
     }

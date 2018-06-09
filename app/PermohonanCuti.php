@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PermohonanCuti extends Model
 {
+	use SoftDeletes;
+
+	protected $dates =['deleted_at'];
 	protected $primaryKey = 'id_permohonan_cuti';
     protected $table = 'tbl_permohonan_cuti';
 	protected $fillable = ['tgl_pengajuan','tgl_mulai','tgl_selesai','alamat_cuti','notelepon','alasan_cuti','status','id_jenis_cuti','alasan_acc_atasan','satus_ppk','alasan_acc_ppk','tgl_mulai_ubah','tgl_selesai_ubah'];

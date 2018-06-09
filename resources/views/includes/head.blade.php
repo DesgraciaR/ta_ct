@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ url('bower_components/bootstrap-daterangepicker/daterangepicker.css') }}">
   <!-- bootstrap datepicker -->
     <link rel="stylesheet" href="{{ url('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+    <link rel="stylesheet" href="{{url('dist/sweetalert/sweetalert.css')}}"
 
    
 
@@ -60,15 +61,16 @@
 <!-- bootstrap datepicker -->
 <script src="{{ url ('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script><!-- 
 sweetAlert -->
-<!-- <script type="{{ url('/dist/js/sweetalert.js') }}"></script>
-<script type="{{ url('/dist/js/sweetalert.min.js') }}"></script> -->
+
+<script type="{{ url('dist/sweetalert/sweetalert.min.js') }}"></script>
+
+
+
 
 <script src="{{ url ('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url ('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
 
 
-
-<script src="{{ url ('vendor/sweetalert/sweetalert.min.js') }}"></script>
 
 <!-- Page script -->
 <script>

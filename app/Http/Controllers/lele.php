@@ -89,6 +89,137 @@ class PermohonancutiController extends Controller
                return Redirect::to('permohonancuti');
 
             }else {
+                $jatah_cuti=JatahcutiModel::where('nip_baru',session()->get('user')->nip_baru)->first();
+
+
+                if($permohonancuti->id_jenis_cuti == 1){
+                  if($jatah_cuti->jumlah_tahun_lalu > 0){
+                    if($permohonancuti->jumlah_cuti <= $jatah_cuti->jumlah_tahun_lalu){
+                      $hasil = $jatah_cuti->jumlah_tahun_lalu - $permohonancuti->jumlah_cuti ;
+                      echo $hasil;
+
+                      $cuti1 =JatahcutiModel::where('nip_baru', session()->get('user')->nip_baru)->first();
+                      $cuti = JatahcutiModel::find($cuti1->id_jatah);
+                      $cuti->jumlah_tahun_lalu=$hasil;
+                      $cuti->save();
+
+                        $cekStatus = PermohonanCuti::where('id_permohonan_cuti', $id)
+                        ->where('status', NULL)
+                        ->orWhere('tgl_diusulkan_ppk', NULL)
+                        ->first();
+
+                       $detailpermohonan = PermohonanCuti::find($id);
+                          //apabila id_permohonan_cuti memiliki status NULL atau tgl_diusulkan_ppk NULL
+                          if(count($cekStatus) > 0) {
+                              $detailpermohonan->status='Diterima';
+                              $detailpermohonan->tgl_diusulkan_ppk=date('Y-m-d');
+
+                          }
+                       $detailpermohonan->status_ppk=$request->tindakan;
+                       $detailpermohonan->alasan_acc_ppk = $request->pesan;
+
+                       $detailpermohonan->tgl_status_ppk=date('Y-m-d');
+                       $detailpermohonan->save();
+                     // return back();
+                       return Redirect::to('permohonancuti');
+
+
+                    }else{
+                      if($jatah_cuti->jumlah_tahun_ini > 0){
+                          $jumlah = $jumlah_cuti->jumlah_tahun_lalu + $jumlah_cuti->jumlah_tahun_ini;
+                          if($permohonancuti->jumlah_cuti <= $jumlah){
+                             $hasil = ($jumlah_cuti->jumlah_tahun_lalu - $permohonancuti->jumlah_cuti) + $jatah_cuti->jumlah_tahun_ini ;
+                          echo $hasil ;   
+
+                          $cuti1 =JatahcutiModel::where('nip_baru', session()->get('user')->nip_baru)->first();
+                          $cuti = JatahcutiModel::find($cuti1->id_jatah);
+                          $cuti->jumlah_tahun_lalu=0;
+                          $cuti->jumlah_tahun_ini=$hasil;
+
+                          $cuti->save();
+
+
+                          $cekStatus = PermohonanCuti::where('id_permohonan_cuti', $id)
+                            ->where('status', NULL)
+                            ->orWhere('tgl_diusulkan_ppk', NULL)
+                            ->first();
+
+                           $detailpermohonan = PermohonanCuti::find($id);
+                              //apabila id_permohonan_cuti memiliki status NULL atau tgl_diusulkan_ppk NULL
+                              if(count($cekStatus) > 0) {
+                                  $detailpermohonan->status='Diterima';
+                                  $detailpermohonan->tgl_diusulkan_ppk=date('Y-m-d');
+
+                              }
+                           $detailpermohonan->status_ppk=$request->tindakan;
+                           $detailpermohonan->alasan_acc_ppk = $request->pesan;
+
+                           $detailpermohonan->tgl_status_ppk=date('Y-m-d');
+                           $detailpermohonan->save();
+                         // return back();
+                           return Redirect::to('permohonancuti');
+
+                          }else{
+                            return Redirect::to('pesan')->withErrors('Jumlah cuti yang diambil melebihi batas');
+
+                          }
+
+                      }else{
+                            return Redirect::to('pesan')->withErrors('Jumlah cuti yang diambil melebihi batas');
+                      }
+
+                    }
+
+
+                  }else{
+                    if($jatah_cuti->jumlah_tahun_ini > 0){
+                      if($permohonancuti->jumlah_cuti <= $jatah_cuti->jumlah_tahun_ini){
+                         $hasil = $jatah_cuti->jumlah_tahun_ini - $permohonancuti->jumlah_cuti;
+                          echo $hasil ; 
+
+                          $cuti1 =JatahcutiModel::where('nip_baru', session()->get('user')->nip_baru)->first();
+                          $cuti = JatahcutiModel::find($cuti1->id_jatah);
+                          $cuti->jumlah_tahun_ini=$hasil;
+
+                          $cuti->save();
+
+
+                             $cekStatus = PermohonanCuti::where('id_permohonan_cuti', $id)
+                              ->where('status', NULL)
+                              ->orWhere('tgl_diusulkan_ppk', NULL)
+                              ->first();
+
+                             $detailpermohonan = PermohonanCuti::find($id);
+                                //apabila id_permohonan_cuti memiliki status NULL atau tgl_diusulkan_ppk NULL
+                                if(count($cekStatus) > 0) {
+                                    $detailpermohonan->status='Diterima';
+                                    $detailpermohonan->tgl_diusulkan_ppk=date('Y-m-d');
+
+                                }
+                             $detailpermohonan->status_ppk=$request->tindakan;
+                             $detailpermohonan->alasan_acc_ppk = $request->pesan;
+
+                             $detailpermohonan->tgl_status_ppk=date('Y-m-d');
+                             $detailpermohonan->save();
+                           // return back();
+                             return Redirect::to('permohonancuti');
+                                    
+
+
+                      }else{
+
+                           return back()->withErrors(['Jumlah cuti tidak mencukupi ']);
+
+                      }
+                    }else{
+                             return back()->withErrors(['Jumlah cuti tidak mencukupi ']);
+                    }
+
+                  }
+
+
+                }else{
+
                 $cekStatus = PermohonanCuti::where('id_permohonan_cuti', $id)
                 ->where('status', NULL)
                 ->orWhere('tgl_diusulkan_ppk', NULL)
@@ -108,6 +239,7 @@ class PermohonancutiController extends Controller
                $detailpermohonan->save();
              // return back();
                return Redirect::to('permohonancuti');
+                }
 
             }
         }else{
